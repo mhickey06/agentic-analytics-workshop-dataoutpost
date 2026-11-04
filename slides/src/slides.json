@@ -29,7 +29,7 @@
     "kind": "custom",
     "theme": "sand",
     "section": "MOTHERDUCK WORKSHOP",
-    "notes": "The split is computed from the hands-on minutes on the slides: 50 minutes of hands-on (setup 5, level 1 10, level 2 15 in three parts, level 3 10, level 4 10) and 40 minutes of us talking (intro 1, the agent 12, the analytics job 8, level 1 4, level 2 5, level 3 2, level 4 2, wrap 6). Tight spots: the intro (two intros, these rules and the agenda in about a minute, so setup must happen before the day) and level 2 talk (eight talk slides in five minutes). TODO: the Slack channel for this workshop."
+    "notes": "The split is computed from the hands-on minutes on the slides: 50 minutes of hands-on (setup 5, level 1 10, level 2 15 in three parts, level 3 10, level 4 10) and 40 minutes of us talking (intro 1, the agent 12, the analytics job 8, level 1 4, level 2 5, level 3 2, level 4 2, wrap 6). Tight spots: the intro (two intros, these rules and the agenda in about a minute, so setup must happen before the day) and level 2 talk (eight talk slides in five minutes). Slack: slack.motherduck.com, channel #dataoutpost-2026-workshop-agents. The QR on every slide opens these slides (bit.ly/4iVuj9E); the GitHub icon opens the repo."
   },
   {
     "id": "agenda",
@@ -384,7 +384,7 @@
     "id": "ho-dive",
     "theme": "sand",
     "kind": "custom",
-    "title": "Hands-on 2C: build a Dive, give it a style",
+    "title": "Hands-on 2C: build and style a Dive",
     "section": "LEVEL 2 · MOTHERDUCK · HANDS-ON",
     "minutes": 5,
     "exercise": "exercises/2c-dive",

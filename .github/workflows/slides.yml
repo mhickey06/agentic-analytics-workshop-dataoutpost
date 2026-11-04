@@ -1,4 +1,4 @@
-# Builds slides/ and publishes it to GitHub Pages (private: repo members only).
+# Builds slides/ and publishes it to GitHub Pages: motherduckdb.github.io/agentic-analytics-workshop-dataoutpost
 name: Slides
 
 on:

@@ -1,4 +1,4 @@
-# Hands-on 2C: build a Dive, give it a style
+# Hands-on 2C: build and style a Dive
 
 Time: 5 minutes. You need hands-on [2A](../2a-mcp/README.md) and [2B](../2b-guide/README.md) done, in the
 same conversation or a new one.

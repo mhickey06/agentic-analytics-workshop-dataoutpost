@@ -4,7 +4,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import rawSlides from './slides.json'
 import type { Slide } from './types'
-import { Visual } from './Visuals'
+import { SlidesBadge, Visual } from './Visuals'
 import { Syntax } from './Syntax'
 import './deck.css'
 import './workshop.css'
@@ -179,6 +179,7 @@ export default function Deck() {
           )}
           {slide.kind === 'code' && <Code slide={slide} focus={focus} />}
           {slide.body && <p className="body">{slide.body}</p>}
+          {slide.id !== 'house-rules' && <SlidesBadge />}
           <footer>
             {slide.source ? (
               <a href={slide.source} target="_blank" rel="noopener noreferrer">

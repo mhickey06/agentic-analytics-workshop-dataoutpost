@@ -1478,6 +1478,16 @@
 /* Rules for this workshop */
 .ws-house-rules {
   width: 1430px;
+  display: flex;
+  align-items: center;
+  gap: 70px;
+}
+.ws-house-rules-main {
+  flex: 1;
+}
+.ws-house-rules a {
+  color: inherit;
+  white-space: nowrap;
 }
 .ws-house-rules ol {
   margin: 0;
@@ -1936,4 +1946,124 @@
 }
 .ws-visual.ws-ho-dense .ws-ho-cmd {
   font-size: 13px;
+}
+
+/* Slides QR, short link and repo: top right of every slide, bigger on the rules slide.
+   It starts below the fixed deck controls so they never cover the code. */
+.ws-slides-badge {
+  position: absolute;
+  top: 50px;
+  right: 30px;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font:
+    14px AeonikMono,
+    monospace;
+}
+.ws-slides-badge a {
+  color: inherit;
+  text-decoration: none;
+}
+.ws-slides-badge a:hover span,
+.ws-slides-badge-short:hover {
+  text-decoration: underline;
+}
+.ws-slides-badge-gh {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+.ws-gh-mark {
+  width: 28px;
+  height: 28px;
+}
+.ws-slides-badge-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.ws-slides-badge-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.ws-slides-badge-qr img {
+  display: block;
+  width: 88px;
+  height: 88px;
+  border: 2px solid var(--ink);
+}
+.ws-slides-badge-qr span {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+}
+.ws-slides-badge-short {
+  font-size: 13px;
+}
+/* Titles stop before the badge */
+.slide:has(> .ws-slides-badge) > h1 {
+  max-width: 1280px;
+}
+/* The hands-on duck moves left of the badge */
+.ws-ho-duck {
+  right: 128px;
+  top: -170px;
+  width: 165px;
+}
+/* Dense hands-on slides start higher: a smaller duck stays below the deck controls */
+.ws-ho-dense .ws-ho-duck {
+  width: 125px;
+  top: -138px;
+}
+/* The reveal button moves to the footer row, out of the badge's corner */
+.ws-reveal {
+  top: auto;
+  bottom: 18px;
+  right: 190px;
+}
+/* Rules slide: the big version */
+.ws-slides-badge-big {
+  position: static;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 18px;
+}
+.ws-slides-badge-big .ws-slides-badge-qr img {
+  width: 300px;
+  height: 300px;
+}
+.ws-slides-badge-big .ws-slides-badge-qr span {
+  font-size: 20px;
+}
+.ws-slides-badge-big .ws-slides-badge-short {
+  font-size: 24px;
+  margin-top: 6px;
+}
+.ws-slides-badge-big .ws-slides-badge-gh {
+  font-size: 20px;
+}
+.ws-slides-badge-big .ws-gh-mark {
+  width: 32px;
+  height: 32px;
+}
+/* Title slide: a bigger QR, no GitHub icon, below the MotherDuck logo of the organizers' design */
+.hero-slide > .ws-slides-badge {
+  top: 266px;
+  right: 60px;
+}
+.hero-slide .ws-slides-badge-gh {
+  display: none;
+}
+.hero-slide .ws-slides-badge-qr img {
+  width: 150px;
+  height: 150px;
+}
+.hero-slide .ws-slides-badge-qr span,
+.hero-slide .ws-slides-badge-short {
+  font-size: 14px;
 }

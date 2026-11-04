@@ -47,8 +47,8 @@ Parquet on public S3 (level 1) and as a MotherDuck share (levels 2 to 4).
 
 ## Slides
 
-**View the slides:** [symmetrical-barnacle-rkwr531.pages.github.io](https://symmetrical-barnacle-rkwr531.pages.github.io/)
-(GitHub Pages, private: you need access to this repo). Every push to `main` that touches
+**View the slides:** [motherduckdb.github.io/agentic-analytics-workshop-dataoutpost](https://motherduckdb.github.io/agentic-analytics-workshop-dataoutpost/)
+(short link: [bit.ly/4iVuj9E](https://bit.ly/4iVuj9E), the QR on every slide). Every push to `main` that touches
 `slides/` or `exercises/` rebuilds it. The public copy will be
 [mehdio.com/talks/next-data-stack-has-no-ui](https://mehdio.com/talks/next-data-stack-has-no-ui)
 once the deck is merged on mehdio.com.
