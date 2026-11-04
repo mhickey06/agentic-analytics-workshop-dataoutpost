@@ -101,6 +101,13 @@ export default function Deck() {
       ? document.exitFullscreen()
       : document.documentElement.requestFullscreen()
 
+  const [isFullscreen, setIsFullscreen] = useState(false)
+  useEffect(() => {
+    const sync = () => setIsFullscreen(Boolean(document.fullscreenElement))
+    document.addEventListener('fullscreenchange', sync)
+    return () => document.removeEventListener('fullscreenchange', sync)
+  }, [])
+
   useEffect(() => {
     const keyboard = (e: KeyboardEvent) => {
       const target = e.target instanceof Element ? e.target : null
@@ -194,27 +201,21 @@ export default function Deck() {
           </footer>
         </section>
       </main>
-      <nav className="controls" aria-label="Presentation controls">
-        <button
-          aria-label="Previous slide"
-          disabled={current === 0}
-          onClick={() => navigate(current - 1)}
-        >
-          ←
-        </button>
-        <button
-          aria-label="Next slide"
-          disabled={current === slides.length - 1}
-          onClick={() => navigate(current + 1)}
-        >
-          →
-        </button>
-        <button onClick={() => setOverview(v => !v)}>G · slides</button>
-        <button onClick={() => setNotes(v => !v)}>N · notes</button>
-        <button onClick={() => fullscreen().catch(() => {})}>
-          F · full screen
-        </button>
-      </nav>
+      {/* One control: full screen. Esc exits it. Arrows, G (slides), N (notes) and F stay on the keyboard. */}
+      {!isFullscreen && (
+        <nav className="controls" aria-label="Presentation controls">
+          <button
+            className="ws-fullscreen"
+            aria-label="Full screen (F). Esc to exit."
+            title="Full screen (F). Esc to exit."
+            onClick={() => fullscreen().catch(() => {})}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" />
+            </svg>
+          </button>
+        </nav>
+      )}
       {notes && (
         <aside className="notes" aria-label="Speaker notes">
           <button className="close" onClick={() => setNotes(false)}>

@@ -12,8 +12,11 @@ type Chapter = {
   title: string
   feature: string
   icon: IconName
+  // Minutes of us talking in this chapter. The agenda adds the hands-on minutes.
+  talk: number
   handsOn?: string
-  // More hands-on slides in the same level, counted in the agenda minutes.
+  // More hands-on slides in the same level, counted in the agenda minutes. Path B of level 4 is
+  // an alternative to path A, so it is not counted.
   alsoHandsOn?: string[]
 }
 
@@ -23,14 +26,16 @@ const ideas: Chapter[] = [
     num: '01',
     title: "What's an agent?",
     feature: 'Loop · tools · skills · harness',
-    icon: 'loop'
+    icon: 'loop',
+    talk: 12
   },
   {
     id: 's-job',
     num: '02',
     title: "What's an agent for analytics?",
     feature: 'Six tasks · the stack with no UI',
-    icon: 'layers'
+    icon: 'layers',
+    talk: 8
   }
 ]
 
@@ -41,6 +46,7 @@ const levels: Chapter[] = [
     title: 'Local',
     feature: 'DuckDB + Claude Code, on your laptop',
     icon: 'box',
+    talk: 4,
     handsOn: 'ho-local'
   },
   {
@@ -49,6 +55,7 @@ const levels: Chapter[] = [
     title: 'MotherDuck',
     feature: 'Remote MCP · Guides · Dives',
     icon: 'db',
+    talk: 5,
     handsOn: 'ho-md',
     alsoHandsOn: ['ho-guide', 'ho-dive']
   },
@@ -58,6 +65,7 @@ const levels: Chapter[] = [
     title: 'Custom MCP',
     feature: 'Secure views · your MCP server',
     icon: 'tool',
+    talk: 2,
     handsOn: 'ho-tools'
   },
   {
@@ -66,9 +74,15 @@ const levels: Chapter[] = [
     title: 'Custom agent',
     feature: 'Your loop · your model',
     icon: 'model',
+    talk: 2,
     handsOn: 'ho-agent'
   }
 ]
+
+const slideMinutes = (id: string) => (rawSlides as Slide[]).find(x => x.id === id)?.minutes ?? 0
+const handsOnMinutes = (c: Chapter) =>
+  c.handsOn ? [c.handsOn, ...(c.alsoHandsOn ?? [])].reduce((sum, h) => sum + slideMinutes(h), 0) : 0
+const chapterMinutes = (c: Chapter) => c.talk + handsOnMinutes(c)
 
 // Guess slides: the room guesses first, then R (or the button) reveals the answer.
 function useReveal() {
@@ -176,10 +190,7 @@ function Person({ id }: { id: string }) {
 
 // Talk vs hands-on, computed from the agenda in PLAN.md and the hands-on minutes in slides.json.
 function HouseRules() {
-  const doing = (rawSlides as Slide[]).reduce(
-    (sum, s) => sum + (s.id?.startsWith('ho-') ? (s.minutes ?? 0) : 0),
-    0
-  )
+  const doing = slideMinutes('ho-setup') + levels.reduce((sum, c) => sum + handsOnMinutes(c), 0)
   const rules = [
     'No stupid question.',
     'Interrupt us whenever you want: raise your hand. Or quack.',
@@ -204,8 +215,6 @@ function HouseRules() {
 }
 
 function Agenda({ onJump }: { onJump: Props['onJump'] }) {
-  const minutes = (id: string) =>
-    (rawSlides as Slide[]).find(x => x.id === id)?.minutes
   return (
     <div className="ws-visual ws-agenda">
       <div className="ws-agenda-row ws-agenda-ideas">
@@ -215,6 +224,7 @@ function Agenda({ onJump }: { onJump: Props['onJump'] }) {
             <Icon name={c.icon} />
             <h2>{c.title}</h2>
             <p>{c.feature}</p>
+            <span className="ws-agenda-time">{chapterMinutes(c)} MIN</span>
           </button>
         ))}
       </div>
@@ -239,15 +249,11 @@ function Agenda({ onJump }: { onJump: Props['onJump'] }) {
                     onJump(c.handsOn!)
                   }}
                 >
-                  HANDS-ON ·{' '}
-                  {[c.handsOn, ...(c.alsoHandsOn ?? [])].reduce(
-                    (sum, h) => sum + (minutes(h) ?? 0),
-                    0
-                  )}{' '}
-                  MIN
+                  HANDS-ON · {handsOnMinutes(c)} MIN
                 </span>
               </span>
             )}
+            <span className="ws-agenda-time">{chapterMinutes(c)} MIN</span>
           </button>
         ))}
       </div>
