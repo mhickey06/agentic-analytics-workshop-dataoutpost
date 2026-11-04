@@ -184,18 +184,21 @@ function HouseRules() {
     'No stupid question.',
     'Interrupt us whenever you want: raise your hand. Or quack.',
     'Ahead in the exercise? Help the person next to you. Teaching is learning.',
-    'Join slack.motherduck.com to get the content or ask any question.'
+    `Join [slack.motherduck.com](${SLACK_URL}) and [#dataoutpost-2026-workshop-agents](${SLACK_CHANNEL_URL}) to get the content or ask any question.`
   ]
   return (
     <div className="ws-visual ws-house-rules">
-      <ol>
-        {rules.map(r => (
-          <li key={r}>{r}</li>
-        ))}
-      </ol>
-      <p className="ws-house-rules-time">
-        1h30 = {90 - doing} min us talking + {doing} min you doing
-      </p>
+      <div className="ws-house-rules-main">
+        <ol>
+          {rules.map(r => (
+            <li key={r}>{withLinks(r)}</li>
+          ))}
+        </ol>
+        <p className="ws-house-rules-time">
+          1h30 = {90 - doing} min us talking + {doing} min you doing
+        </p>
+      </div>
+      <SlidesBadge big />
     </div>
   )
 }
@@ -1695,6 +1698,48 @@ function SecureAnim() {
 }
 
 const REPO = 'https://github.com/motherduckdb/agentic-analytics-workshop-dataoutpost'
+const SLIDES_URL = 'https://bit.ly/4iVuj9E'
+const SLACK_URL = 'https://slack.motherduck.com'
+const SLACK_CHANNEL_URL = 'https://motherduckcommunity.slack.com/archives/C0CED3KBWAF'
+
+function GitHubMark() {
+  return (
+    <svg viewBox="0 0 16 16" aria-hidden="true" className="ws-gh-mark">
+      <path
+        fill="currentColor"
+        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+      />
+    </svg>
+  )
+}
+
+// The slides QR, the short link for people who cannot scan, and the repo. Top right of every
+// slide (Deck.tsx), and bigger on the rules slide.
+export function SlidesBadge({ big = false }: { big?: boolean }) {
+  return (
+    <div className={'ws-slides-badge' + (big ? ' ws-slides-badge-big' : '')}>
+      <a
+        className="ws-slides-badge-gh"
+        href={REPO}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="The workshop repo on GitHub"
+      >
+        <GitHubMark />
+        {big && <span>Workshop repo</span>}
+      </a>
+      <div className="ws-slides-badge-main">
+        <a className="ws-slides-badge-qr" href={SLIDES_URL} target="_blank" rel="noopener noreferrer">
+          <img src="assets/qr-slides.svg" alt="QR code to these slides: bit.ly/4iVuj9E" />
+          <span>SLIDES</span>
+        </a>
+        <a className="ws-slides-badge-short" href={SLIDES_URL} target="_blank" rel="noopener noreferrer">
+          bit.ly/4iVuj9E
+        </a>
+      </div>
+    </div>
+  )
+}
 
 // Copy a prompt or a command, so nobody types from the projector.
 function CopyButton({ text }: { text: string }) {
@@ -1734,7 +1779,7 @@ function withLinks(text: string) {
   })
 }
 
-// Hands-on slides are driven by slides.json: minutes, steps, doneWhen, needs, status, exercise.
+// Hands-on slides are driven by slides.json: minutes, steps, doneWhen, needs, exercise.
 // Each step can carry terminal commands and a prompt to paste. The same steps and prompts are in
 // the README of the exercise folder, so people copy from the repo, not from the projector.
 function HandsOn({ slide }: { slide: Slide }) {

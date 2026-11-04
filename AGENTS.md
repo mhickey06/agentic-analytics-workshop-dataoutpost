@@ -21,10 +21,12 @@ This repo prepares a workshop. It is not the participant repo yet. Read [PLAN.md
 ## Exercises
 
 - One dataset for every exercise: Gloamwick Studios (`gaming-gloamwick-liveops`, S tier).
-- Each hands-on slide (`ho-*` in `slides.json`) names its folder in `exercise`. That folder's
-  README has the same numbered steps, every `prompt` and `cmd` on the slide word for word, the
-  same time ("Time: N minutes") and the same "Done when". `npm run build` fails when they
-  disagree. Change both together.
+- The hands-on slide is the source of truth for its exercise. Each hands-on slide (`ho-*` in
+  `slides.json`) names its folder in `exercise`. That folder's README has the same numbered steps,
+  each opening with the slide's step text, then every `prompt` and `cmd` on the slide word for
+  word, the same time ("Time: N minutes") and the same "Done when". The README adds detail after
+  the step text. `npm run build` fails when they disagree. Change the slide first, then the
+  README.
 - No answers, answer keys or duckgen `guide.md` under `exercises/`: agents run there and can read
   it. Expected answers live in the speaker notes and PLAN.md.
 

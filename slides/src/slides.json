@@ -29,7 +29,7 @@
     "kind": "custom",
     "theme": "sand",
     "section": "MOTHERDUCK WORKSHOP",
-    "notes": "The split is computed from the hands-on minutes on the slides: 50 minutes of hands-on (setup 5, level 1 10, level 2 15 in three parts, level 3 10, level 4 10) and 40 minutes of us talking (intro 1, the agent 12, the analytics job 8, level 1 4, level 2 5, level 3 2, level 4 2, wrap 6). Tight spots: the intro (two intros, these rules and the agenda in about a minute, so setup must happen before the day) and level 2 talk (eight talk slides in five minutes). TODO: the Slack channel for this workshop."
+    "notes": "The split is computed from the hands-on minutes on the slides: 50 minutes of hands-on (setup 5, level 1 10, level 2 15 in three parts, level 3 10, level 4 10) and 40 minutes of us talking (intro 1, the agent 12, the analytics job 8, level 1 4, level 2 5, level 3 2, level 4 2, wrap 6). Tight spots: the intro (two intros, these rules and the agenda in about a minute, so setup must happen before the day) and level 2 talk (eight talk slides in five minutes). Slack: slack.motherduck.com, channel #dataoutpost-2026-workshop-agents. The QR on every slide opens these slides (bit.ly/4iVuj9E); the GitHub icon opens the repo."
   },
   {
     "id": "agenda",
@@ -314,7 +314,7 @@
     "exercise": "exercises/2a-mcp",
     "steps": [
       {
-        "text": "Connect your agent to the [MotherDuck MCP server](https://motherduck.com/docs/key-tasks/ai-and-motherduck/mcp-setup/) and sign in. Claude, ChatGPT, Claude Code, Codex: steps in the README."
+        "text": "Connect your agent to the [MotherDuck MCP server](https://motherduck.com/docs/key-tasks/ai-and-motherduck/mcp-setup/) and sign in: Claude, ChatGPT, Claude Code, Codex…"
       },
       {
         "text": "Check the connection.",
@@ -384,7 +384,7 @@
     "id": "ho-dive",
     "theme": "sand",
     "kind": "custom",
-    "title": "Hands-on 2C: build a Dive, give it a style",
+    "title": "Hands-on 2C: build and style a Dive",
     "section": "LEVEL 2 · MOTHERDUCK · HANDS-ON",
     "minutes": 5,
     "exercise": "exercises/2c-dive",
@@ -529,8 +529,8 @@
     ],
     "doneWhen": "your agent answered with your tools only, it called live_ops_impact, and you saw your question log as a table.",
     "needs": [
-      "git",
-      "Claude Code, Codex or Cursor",
+      "hands-on 2A done: share attached, MotherDuck MCP connected",
+      "git, and Claude Code, Codex or Cursor",
       "a MotherDuck token and your OpenRouter key, in .env"
     ],
     "notes": "Steps and prompts match exercises/3-custom-mcp/README.md. First clone of the repo, and the .env: cp .env.example .env, then MOTHERDUCK_TOKEN and OPENROUTER_API_KEY. server.py and agent.py read it from the repo root whatever folder they run in; the server only takes the MotherDuck values, so the OpenRouter key never reaches it. Tested 2026-11-03 with no keys in the environment: the server read the token from .env and live_ops_impact returned rows; agent.py ran end to end from .env. --scope user so Claude Code sees the server whatever folder it starts in. The server now serves HTTP on a fixed address, http://127.0.0.1:8000/mcp (PORT to change it), so adding it is one predictable command per agent: claude mcp add --transport http, or codex mcp add --url. Tested 2026-11-03: the server starts over HTTP, lists its six tools, live_ops_impact returns real Gloamwick rows from MotherDuck, the question log is written, and with TRACE_TO_MOTHERDUCK=1 the call lands as an execute_tool span (932 ms). Earlier run (2026-11-02, stdio, Claude Code): 5 turns, 28 s, $0.07, against 16 to 18 turns at levels 1 and 2. Step 5 reads the JSONL log with DuckDB, which sets up step 6: the same idea as OpenTelemetry spans in MotherDuck, then a Dive like the gallery's Agent observability. Step 6 needs the MotherDuck MCP server from 2A in the agent.",
@@ -605,12 +605,11 @@
         "cmd": ["cd ~/gloamwick/agentic-analytics-workshop-dataoutpost/exercises/4-custom-agent"]
       },
       {
-        "text": "Run your agent with the workshop question as its argument.",
-        "cmd": ["uv run agent.py"],
-        "prompt": "Which live-ops changes since spring 2025 moved day-7 retention or revenue per daily active user, and on which platform? Show the SQL."
+        "text": "Run your agent. Without an argument, it asks the workshop question.",
+        "cmd": ["uv run agent.py"]
       },
       {
-        "text": "Read the [step N] lines. Which tools did it call? Did it call how_we_count first?"
+        "text": "Read the [step N] lines. Which tools did it call? Did it use live_ops_impact or write its own SQL?"
       },
       {
         "text": "Swap the model, run again, compare steps and numbers.",

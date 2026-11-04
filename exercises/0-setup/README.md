@@ -14,16 +14,14 @@ supports) and the [MotherDuck CLI](https://motherduck.com/docs/getting-started/i
 
 The prompt is the same as on the slide. Paste it as it is.
 
-1. Install a coding agent, any one you like, for example
-   [Claude Code](https://code.claude.com/docs/en/setup) or
-   [Codex](https://developers.openai.com/codex/cli).
+1. Install a coding agent, any one you like: [Claude Code](https://code.claude.com/docs/en/setup),
+   [Codex](https://developers.openai.com/codex/cli)…
 
-2. Create a free [MotherDuck account](https://app.motherduck.com). No token yet: level 2 signs your
-   agent in through the browser, and level 3 puts the token in a `.env` file.
+2. Create a free [MotherDuck account](https://app.motherduck.com). No token yet: you add one in a
+   `.env` file at level 3. Level 2 signs your agent in through the browser.
 
-3. No AI subscription? Claim a workshop key at
-   [the minter](https://motherduck.com/minter/w/next-data-stack-has-no-ui/) and paste its exports in
-   the terminal you will start your agent from. The key is an OpenRouter key with $5 of credit, for three models only: Claude
+3. No AI subscription? Claim a key at [the minter](https://motherduck.com/minter/w/next-data-stack-has-no-ui/) and
+   paste its exports in the terminal you start your agent from. The key is an OpenRouter key with $5 of credit, for three models only: Claude
    Sonnet 5.5, Claude Haiku 5.5 and GPT-6 Luna. The minter page shows the exports for Claude Code:
 
    ```sh
@@ -35,7 +33,7 @@ The prompt is the same as on the slide. Paste it as it is.
    export ANTHROPIC_DEFAULT_HAIKU_MODEL=anthropic/claude-haiku-5.5
    ```
 
-4. Make a folder for the workshop, start your agent in it, and let it install and check everything:
+4. Make the workshop folder, start your agent in it, and let it install and check everything.
 
    ```sh
    mkdir -p ~/gloamwick && cd ~/gloamwick
@@ -75,7 +73,8 @@ scripts that need it read it.
 
 ## Notes
 
-- Never paste a key into a prompt or a file in this repo. Keys stay in environment variables.
+- Never paste a key into a prompt. Keys stay in environment variables, or in the `.env` of level 3,
+  which git ignores.
 - The MotherDuck installer, run by an agent, skips its interactive token prompt. That is fine: no
   step before level 3 needs a token.
 - Your agent may ask before it runs the installers. Allow it.

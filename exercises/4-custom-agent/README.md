@@ -16,29 +16,32 @@ yours to write.
 
 Path A. The prompt is the same as on the slide. Paste it as it is.
 
-1. Go to the level 4 folder of the repo you cloned at level 3. `agent.py` reads your OpenRouter key
-   and the model from the same `.env` (`MODEL` defaults to `openai/gpt-6-luna`).
+1. Go to the level 4 folder. `agent.py` reads your OpenRouter key and the model from the same
+   `.env` (`MODEL` defaults to `openai/gpt-6-luna`).
 
    ```sh
    cd ~/gloamwick/agentic-analytics-workshop-dataoutpost/exercises/4-custom-agent
    ```
 
-2. Run your agent on the workshop question:
+2. Run your agent. Without an argument, it asks the workshop question.
 
    ```sh
-   uv run agent.py "Which live-ops changes since spring 2025 moved day-7 retention or revenue per daily active user, and on which platform? Show the SQL."
+   uv run agent.py
    ```
 
-3. Read the `[step N]` lines. Which tools did it call? Did it call `how_we_count` before writing
-   SQL?
+   To ask your own question: `uv run agent.py "your question"`.
 
-4. Swap the model and run the same question again. Compare the steps and the numbers.
+3. Read the `[step N]` lines. Which tools did it call? Did it use `live_ops_impact` or write its
+   own SQL?
+
+4. Swap the model, run again, compare steps and numbers.
 
    ```sh
-   MODEL=anthropic/claude-haiku-5.5 uv run agent.py "Which live-ops changes since spring 2025 moved day-7 retention or revenue per daily active user, and on which platform? Show the SQL."
+   MODEL=anthropic/claude-haiku-5.5 uv run agent.py
    ```
 
-5. Change the harness. Run with `MAX_STEPS=2`, or edit `SYSTEM` in `agent.py`. What breaks first?
+5. Change the harness: `MAX_STEPS=2`, or edit `SYSTEM` in `agent.py`. What breaks first? For
+   example `MAX_STEPS=2 uv run agent.py`.
 
 ## Done when
 
@@ -63,7 +66,7 @@ The rows land in `workshop_traces.spans`, with the same columns as the data behi
 1. Run the agent with tracing on:
 
    ```sh
-   TRACE_TO_MOTHERDUCK=1 uv run agent.py "Which live-ops changes since spring 2025 moved day-7 retention or revenue per daily active user, and on which platform? Show the SQL."
+   TRACE_TO_MOTHERDUCK=1 uv run agent.py
    ```
 
 2. Run it again with another model, so you have two traces to compare.
@@ -75,10 +78,6 @@ The rows land in `workshop_traces.spans`, with the same columns as the data behi
    Or open the gallery Dive, choose **Copy Dive to My Account**, and ask your agent to point it at
    `workshop_traces`. Its other tables (cases, tools, handoffs) do not exist here, so expect to drop
    those parts.
-
-Tested on 2026-11-03 on `openai/gpt-6-luna`, with the traces in a local DuckDB file
-(`TRACES_DB=traces.duckdb`): one run gave 12 spans, about 20k input tokens and $0.003. Not yet
-written to MotherDuck itself.
 
 ## Path B: Agent Builder in the browser
 
@@ -94,22 +93,23 @@ approve it. Each run is a MotherDuck Flight in your own account, so its traces s
 The template is Dive Keeper, an agent that looks after one Dive. You simulate the data, look at the
 Dive, then let the agent run on it.
 
-1. Sign in with MotherDuck, choose **New agent**, then the **Dive Keeper** template.
+1. Open [Agent Builder](https://motherduck.com/labs/agent-builder), sign in with MotherDuck,
+   **New agent**, **Dive Keeper** template.
 2. Build, step 1 Access: paste your OpenRouter key. Agent Builder saves it as a MotherDuck secret
    for the agent's Flight.
-3. Simulate the data. Build, step 2 Target Dive: click **Prepare the simulation**. It copies
+3. Simulate the data: Build, step 2, **Prepare the simulation** (step 2 is Target Dive). It copies
    Gloamwick into a new database in your account, with data up to 2025-03-30, and saves a Dive on
    it as the agent's target.
 4. Look at the Dive before the agent runs: click its title to open it in MotherDuck. Note the KPIs,
    the charts and the empty "Flagged by Dive Keeper" panel.
-5. Run the agent: click **Preview run**, next to Save, and watch the trace, every harness, model and
-   tool step. The first healthy run is the baseline and flags up to 3 findings: open the Dive again
+5. Run the agent: **Preview run**. Read the trace, then the flags on the Dive. **Preview run** is
+   next to Save, and the trace shows every harness, model and tool step. The first healthy run is the baseline and flags up to 3 findings: open the Dive again
    to see them on its charts. **Open the run in MotherDuck** shows the Flight run, one row per
    model step and tool call.
-6. Click **Move the data forward**. It adds a week and says what happened. Click **Preview run**
-   again: did the agent see it? Repeat for a few weeks. When it proposes a change, the History tab
+6. Move the data forward, run again. Review the change it proposes on History. **Move the data
+   forward** adds a week and says what happened. Click **Preview run** again: did the agent see it? Repeat for a few weeks. When it proposes a change, the History tab
    has it: click **Review the change**, then approve it.
-7. Compare with `agent.py`. Which of these checks would you add to your loop first?
+7. Compare with `agent.py`: which of these checks would you add to your loop first?
 
 Done when: you looked at the Dive before the first run, the agent's findings are on it, and the
 agent ran again on a week you moved forward.

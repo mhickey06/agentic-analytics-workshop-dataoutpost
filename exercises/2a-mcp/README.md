@@ -10,8 +10,9 @@ local data: the server's tools and instructions tell the agent what to do.
 
 The prompts are the same as on the slide. Paste them as they are.
 
-1. Connect your agent to the MotherDuck MCP server and sign in with your MotherDuck account. Pick
-   your client:
+1. Connect your agent to the [MotherDuck MCP server](https://motherduck.com/docs/key-tasks/ai-and-motherduck/mcp-setup/)
+   and sign in: Claude, ChatGPT, Claude Code, Codex… Sign in with your MotherDuck account. Pick your
+   client:
 
    - Claude, on the web or in the desktop app: [add MotherDuck to Claude](https://claude.ai/directory/motherduck),
      or go to **Customize**, **Connectors**, **+**, find **MotherDuck**, click **Connect** and
@@ -38,8 +39,8 @@ The prompts are the same as on the slide. Paste them as they are.
 
    > ATTACH 'md:_share/dg_gaming_gloamwick_liveops_s_82cb146b_r1/936b62ca-cd54-41a6-987d-f7b64215a773' AS gaming_gloamwick_liveops; This is fictional data for Gloamwick Studios, a free-to-play mobile game on iOS and Android. Did the starter pack price cut lift payer conversion? Split by acquisition channel, before and after. Show the SQL.
 
-4. Write down the conversion per channel, before and after, and how your agent defined "payer
-   conversion". Compare with your neighbor.
+4. Write down the conversion per channel and how your agent defined "payer conversion". Compare
+   with your neighbor. Keep both numbers, before and after the price cut.
 
 ## Done when
 

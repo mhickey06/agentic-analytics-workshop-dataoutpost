@@ -1,8 +1,11 @@
 # Hands-on 3: your own MCP server
 
-Time: 10 minutes. You need git, uv, a MotherDuck token, your OpenRouter key (the workshop key, for
-level 4), and the Gloamwick share attached in your MotherDuck account (step 3 of
-[hands-on 2A](../2a-mcp/README.md) does it).
+Time: 10 minutes. You need:
+
+- [Hands-on 2A](../2a-mcp/README.md) done: the Gloamwick share attached in your MotherDuck account
+  (its step 3 does it), and your agent connected to the MotherDuck MCP server (the bonus uses it).
+- git, and Claude Code, Codex or Cursor. uv from hands-on 0.
+- A MotherDuck token and your OpenRouter key (the workshop key, for level 4), in `.env`.
 
 [`server.py`](server.py) is a small MCP server that sits in front of MotherDuck's, following the
 [MotherDuck white-label guide](https://motherduck.com/docs/key-tasks/ai-and-motherduck/mcp-workflows/white-label-mcp-server/).
@@ -27,11 +30,11 @@ you would deploy the server first.
 
 The prompts are the same as on the slide. Paste them as they are.
 
-1. Clone the workshop repo into your workshop folder and create your `.env` from the example. Then
-   open `.env` and fill in `MOTHERDUCK_TOKEN` (create one in MotherDuck: **Settings**,
-   **Integrations**, [**Access tokens**](https://app.motherduck.com/settings/tokens)) and
-   `OPENROUTER_API_KEY` (your key from [the minter](https://motherduck.com/minter/w/next-data-stack-has-no-ui/)).
-   Then ask your agent to walk you through the server.
+1. Clone the repo and fill in `.env` ([token](https://app.motherduck.com/settings/tokens),
+   [OpenRouter key](https://motherduck.com/minter/w/next-data-stack-has-no-ui/)). Then ask about the server.
+   The commands clone the repo into your workshop folder and create `.env` from the example. Open
+   it and fill in `MOTHERDUCK_TOKEN` (in MotherDuck: **Settings**, **Integrations**, **Access
+   tokens**) and `OPENROUTER_API_KEY` (your key from the minter).
 
    ```sh
    cd ~/gloamwick && git clone https://github.com/motherduckdb/agentic-analytics-workshop-dataoutpost.git
@@ -42,14 +45,14 @@ The prompts are the same as on the slide. Paste them as they are.
 
    > Explain agentic-analytics-workshop-dataoutpost/exercises/3-custom-mcp/server.py in five lines: its tools, the one that only exists here, where the token comes from, what it logs.
 
-2. Start your server in a second terminal and leave it running. It reads your token from `.env` and
-   serves MCP on `http://127.0.0.1:8000/mcp`.
+2. Start the server in a second terminal. It reads `.env` and serves `http://127.0.0.1:8000/mcp`.
+   Leave it running.
 
    ```sh
    cd ~/gloamwick/agentic-analytics-workshop-dataoutpost/exercises/3-custom-mcp && uv run server.py
    ```
 
-3. Add the server to your agent, then restart your agent:
+3. Add it to your agent (Claude Code, then Codex), and restart the agent:
 
    ```sh
    claude mcp add --scope user --transport http company-data http://127.0.0.1:8000/mcp
@@ -59,8 +62,8 @@ The prompts are the same as on the slide. Paste them as they are.
    The first line is for Claude Code (`/mcp` should then show `company-data` connected), the second
    for Codex (`codex mcp list` should then show it). Other agents: add an HTTP MCP server with that URL.
 
-4. Ask the workshop question with your tools only. Watch for `live_ops_impact` in the tool calls:
-   only your server has it. Paste:
+4. Ask with your tools only. Watch for `live_ops_impact`: only your server has it. It is the
+   workshop question again. Paste:
 
    > Use only the company-data tools. Which live-ops changes since spring 2025 moved day-7 retention or revenue per daily active user, and on which platform? Show the SQL.
 
@@ -68,8 +71,8 @@ The prompts are the same as on the slide. Paste them as they are.
 
    > Use the DuckDB CLI to show agentic-analytics-workshop-dataoutpost/exercises/3-custom-mcp/questions.jsonl as a table: time, question and outcome.
 
-6. Bonus: trace your agent into MotherDuck. Stop the server (Ctrl-C), start it again with tracing on,
-   ask the workshop question again, then build a Dive over the traces:
+6. Bonus: restart the server with traces, ask again, then build a Dive over them. Stop the server
+   with Ctrl-C and start it with tracing on:
 
    ```sh
    TRACE_TO_MOTHERDUCK=1 uv run server.py
