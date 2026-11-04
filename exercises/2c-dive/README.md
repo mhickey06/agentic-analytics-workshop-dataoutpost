@@ -17,9 +17,9 @@ The prompts are the same as on the slide. Paste them as they are.
 
 2. Open it, in the chat if your client shows it there, or with the link.
 
-3. Pick a theme in the [Dive theme gallery](https://motherduck.com/docs/key-tasks/dives/dive-theme-gallery/)
-   (Tufte Minimal, FT Salmon, Du Bois…). Paste this line, then the theme's prompt from the gallery
-   under it:
+3. Pick a theme in the [Dive theme gallery](https://motherduck.com/docs/key-tasks/dives/dive-theme-gallery/),
+   then paste this line and the theme's prompt under it. Themes include Tufte Minimal, FT Salmon and
+   Du Bois:
 
    > Restyle my Dive with the theme below. Keep the same data and charts.
 

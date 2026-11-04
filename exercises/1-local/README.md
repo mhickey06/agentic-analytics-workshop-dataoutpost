@@ -12,8 +12,8 @@ what the agent does.
 
 The prompts are the same as on the slide. Paste them as they are.
 
-1. Start your agent in your `gloamwick` folder and ask it to add the [skill file](https://github.com/motherduckdb/agentic-analytics-workshop-dataoutpost/blob/main/exercises/1-local/skills/company-analytics/SKILL.md) itself.
-   Then restart your agent so it loads the skill. Paste:
+1. Start your agent in your `gloamwick` folder and ask it to add the [skill file](https://github.com/motherduckdb/agentic-analytics-workshop-dataoutpost/blob/main/exercises/1-local/skills/company-analytics/SKILL.md).
+   Then restart it so it loads the skill. Paste:
 
    > Add the skill at https://raw.githubusercontent.com/motherduckdb/agentic-analytics-workshop-dataoutpost/main/exercises/1-local/skills/company-analytics/SKILL.md to this project's skills folder, as company-analytics/SKILL.md. Then tell me in one line what it does.
 
@@ -29,7 +29,7 @@ The prompts are the same as on the slide. Paste them as they are.
 
    > Build dashboard.html, one file I open locally: weekly day-7 retention and revenue per daily active user by platform, with a marker on each live-ops change.
 
-5. Open the dashboard in your browser. Then ask yourself: who else can open it?
+5. Open it. Who else can open it?
 
    ```sh
    open dashboard.html

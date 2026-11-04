@@ -9,7 +9,8 @@ The model is any OpenRouter model (OPENROUTER_API_KEY, MODEL, from your environm
 openai/gpt-6-luna (default), anthropic/claude-haiku-5.5 and anthropic/claude-sonnet-5.5.
 The tools come from your level 3 MCP server, started as a subprocess.
 
-    uv run agent.py "Which live-ops changes moved retention and ARPDAU?"
+    uv run agent.py                      asks the workshop question (QUESTION below)
+    uv run agent.py "your own question"
 
 Bonus: TRACE_TO_MOTHERDUCK=1 writes the run as OpenTelemetry GenAI spans to MotherDuck:
 invoke_agent, then chat (tokens, cost) and execute_tool (see ../3-custom-mcp/traces.py).
@@ -28,6 +29,11 @@ from fastmcp.client.transports import StdioTransport
 
 load_dotenv(find_dotenv(usecwd=True) or find_dotenv())  # the repo's .env; the environment wins
 
+# The workshop question, asked when you run agent.py without an argument.
+QUESTION = (
+    "Which live-ops changes since spring 2025 moved day-7 retention or revenue per daily active user, "
+    "and on which platform? Show the SQL."
+)
 MODEL = os.environ.get("MODEL", "openai/gpt-6-luna")
 MAX_STEPS = int(os.environ.get("MAX_STEPS", "12"))
 SERVER = Path(__file__).parent.parent / "3-custom-mcp" / "server.py"
@@ -93,4 +99,4 @@ async def main(question: str) -> None:
 
 
 if __name__ == "__main__":
-    asyncio.run(main(" ".join(sys.argv[1:]) or "What tables do we have?"))
+    asyncio.run(main(" ".join(sys.argv[1:]) or QUESTION))

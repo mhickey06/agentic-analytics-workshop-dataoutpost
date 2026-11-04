@@ -14,13 +14,13 @@ The prompts are the same as on the slide. Paste them as they are.
 1. Read [`GUIDE.md`](https://github.com/motherduckdb/agentic-analytics-workshop-dataoutpost/blob/main/exercises/2b-guide/GUIDE.md) on GitHub. Which line would have
    changed your 2A answer?
 
-2. Create the guide. Paste this line, then the whole content of `GUIDE.md` under it (GitHub's copy
-   button on the file, or the [raw file](https://raw.githubusercontent.com/motherduckdb/agentic-analytics-workshop-dataoutpost/main/exercises/2b-guide/GUIDE.md)):
+2. Create the guide: paste this line, then the whole content of [`GUIDE.md`](https://raw.githubusercontent.com/motherduckdb/agentic-analytics-workshop-dataoutpost/main/exercises/2b-guide/GUIDE.md)
+   under it. GitHub's copy button on the file works too:
 
    > Create a private MotherDuck guide titled "Gloamwick: how we count" with the text below, word for word.
 
-3. Start a new conversation (a new chat, or `/clear` in Claude Code), then ask the 2A question
-   again. Paste:
+3. Start a new conversation and ask the 2A question again. A new chat, or `/clear` in Claude Code.
+   Paste:
 
    > ATTACH 'md:_share/dg_gaming_gloamwick_liveops_s_82cb146b_r1/936b62ca-cd54-41a6-987d-f7b64215a773' AS gaming_gloamwick_liveops; This is fictional data for Gloamwick Studios, a free-to-play mobile game on iOS and Android. Did the starter pack price cut lift payer conversion? Split by acquisition channel, before and after. Show the SQL.
 

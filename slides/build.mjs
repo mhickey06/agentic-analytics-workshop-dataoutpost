@@ -15,8 +15,9 @@ const title = 'The Next Data Stack Has No UI · MotherDuck workshop'
 const description =
   'Build an analytics agent end to end, and map each fundamental to MotherDuck. Mehdi Ouazza and Jacob Matson.'
 
-// Hands-on slides and exercise READMEs must agree: same number of steps, and every prompt and
-// command on the slide appears word for word in the README. People copy from the README.
+// Hands-on slides and exercise READMEs must agree: same number of steps, each README step opens
+// with the slide's step text, and every prompt and command on the slide appears word for word in
+// the README. The slide is the source of truth; the README adds detail.
 async function checkExercises() {
   const slides = JSON.parse(await fs.readFile(path.join(root, 'src/slides.json'), 'utf8'))
   const problems = []
@@ -38,6 +39,26 @@ async function checkExercises() {
     if (count !== (s.steps ?? []).length) {
       problems.push(`${s.id}: ${s.steps?.length ?? 0} steps on the slide, ${count} in the README`)
     }
+    // The slide is the source of truth: each README step opens with the slide's step text, word for
+    // word (links compare by label; backticks, bold, curly quotes, case and line breaks aside).
+    // The README adds detail after it.
+    const plain = t =>
+      t
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+        .replace(/`|\*\*/g, '')
+        .replace(/[\u201c\u201d]/g, '"')
+        .replace(/[\u2018\u2019]/g, "'")
+        .replace(/\s+/g, ' ')
+        .trim()
+        .toLowerCase()
+    const items = section.split(/^\d+\. /m).slice(1)
+    ;(s.steps ?? []).forEach((st, i) => {
+      const want = plain(typeof st === 'string' ? st : st.text).replace(/[.:]$/, '')
+      const got = plain((items[i] ?? '').split(/\n\s*\n/)[0])
+      if (!got.startsWith(want)) {
+        problems.push(`${s.id}: step ${i + 1} differs:\n    slide:  ${want}\n    README: ${got.slice(0, want.length + 30)}`)
+      }
+    })
     for (const st of s.steps ?? []) {
       if (typeof st === 'string') continue
       for (const text of [st.prompt, ...(st.cmd ?? [])].filter(Boolean)) {
