@@ -2067,3 +2067,40 @@
 .hero-slide .ws-slides-badge-short {
   font-size: 14px;
 }
+
+/* Deck controls: one full-screen icon, top right. The keyboard does the rest. */
+.controls .ws-fullscreen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+}
+.controls .ws-fullscreen svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: square;
+}
+
+/* Agenda: each chapter's time, talk and hands-on, in the bottom-right corner */
+.ws-agenda .ws-agenda-time {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font:
+    17px AeonikMono,
+    monospace;
+  letter-spacing: 0.06em;
+  color: var(--sand);
+  background: var(--ink);
+  padding: 5px 10px;
+}
+/* Level boxes: room under the hands-on badge for the time */
+.ws-agenda .ws-agenda-levels button {
+  height: 300px;
+  padding-bottom: 48px;
+}

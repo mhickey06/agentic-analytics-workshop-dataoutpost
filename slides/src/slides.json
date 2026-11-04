@@ -37,7 +37,7 @@
     "kind": "custom",
     "theme": "sand",
     "section": "00 · TODAY",
-    "notes": "Click a box to jump, or click HANDS-ON to go straight to the exercise. Row one gives the vocabulary: what is in an agent, and what an agent has to do in analytics. Row two is the four levels of agentic analytics work, each with a hands-on. At each level one more part of the agent becomes yours: first a local agent on your laptop, then MotherDuck so anyone can query, then your own MCP server, then your own loop and model."
+    "notes": "Click a box to jump, or click HANDS-ON to go straight to the exercise. Row one gives the vocabulary: what is in an agent, and what an agent has to do in analytics. Row two is the four levels of agentic analytics work, each with a hands-on. At each level one more part of the agent becomes yours: first a local agent on your laptop, then MotherDuck so anyone can query, then your own MCP server, then your own loop and model. The time on each box is talk plus hands-on: 01 12, 02 8, L1 14, L2 20, L3 12, L4 12 min. With the intro and setup (6) and the wrap (6), that is 90. Path B of level 4 replaces path A, so it adds no time."
   },
   {
     "id": "solved",
