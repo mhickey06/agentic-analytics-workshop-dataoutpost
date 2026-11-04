@@ -1,0 +1,701 @@
+[
+  {
+    "id": "hero",
+    "title": "The Next Data Stack Has No UI: Building End-to-End Analytics with Agents and Ducks",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "MOTHERDUCK WORKSHOP",
+    "notes": "90 minutes. Timing: intro and setup 0:00, the agent 0:06, the analytics job 0:18, level 1 local 0:26, level 2 MotherDuck 0:40 (2A, 2B, 2C), level 3 your tools 1:00, level 4 your agent 1:12, wrap 1:24. Every hands-on slide mirrors the README of its exercises/ folder: same numbered steps, same prompts, word for word (the build checks it). Participants copy from the README, never from the projector. Guess slides: let the room answer, then press R to reveal."
+  },
+  {
+    "id": "intro-mehdi",
+    "title": "Hi, I'm Mehdi",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "MOTHERDUCK WORKSHOP",
+    "notes": "One minute. Copied from the Jev for analytics talk (2026-10-29). Check 'Home game tonight' still fits the venue."
+  },
+  {
+    "id": "intro-jacob",
+    "title": "Hi, I'm Jacob",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "MOTHERDUCK WORKSHOP",
+    "notes": "Jacob Matson: Seattle based, 2 years and 4 months at MotherDuck, Head of Technical Product Marketing. Loves spreadsheets and ducks. Facts live in Visuals.tsx, people['intro-jacob']. One minute."
+  },
+  {
+    "id": "house-rules",
+    "title": "Rules for this workshop",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "MOTHERDUCK WORKSHOP",
+    "notes": "The split is computed from the hands-on minutes on the slides: 50 minutes of hands-on (setup 5, level 1 10, level 2 15 in three parts, level 3 10, level 4 10) and 40 minutes of us talking (intro 1, the agent 12, the analytics job 8, level 1 4, level 2 5, level 3 2, level 4 2, wrap 6). Tight spots: the intro (two intros, these rules and the agenda in about a minute, so setup must happen before the day) and level 2 talk (eight talk slides in five minutes). TODO: the Slack channel for this workshop."
+  },
+  {
+    "id": "agenda",
+    "title": "Two questions, then four levels",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "00 · TODAY",
+    "notes": "Click a box to jump, or click HANDS-ON to go straight to the exercise. Row one gives the vocabulary: what is in an agent, and what an agent has to do in analytics. Row two is the four levels of agentic analytics work, each with a hands-on. At each level one more part of the agent becomes yours: first a local agent on your laptop, then MotherDuck so anyone can query, then your own MCP server, then your own loop and model."
+  },
+  {
+    "id": "solved",
+    "title": "Text to SQL is solved",
+    "body": "Knowing what your business means by “revenue” is not.",
+    "kind": "statement",
+    "theme": "ink",
+    "section": "00 · WHY THIS WORKSHOP",
+    "notes": "Every model in the room writes valid SQL. The hard part is the definition: which rows count, which units, which days. That is what the next 85 minutes are about. Keep this under a minute."
+  },
+  {
+    "id": "dataset",
+    "title": "One company for everyone",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "00 · TODAY · THE DATA",
+    "source": "https://motherduck.com/duckgen/api/v1/datasets/",
+    "sourceLabel": "DUCKGEN API · gaming-gloamwick-liveops · S TIER",
+    "notes": "Everyone works on Gloamwick Studios, a duckgen dataset (gaming-gloamwick-liveops, S tier, release 20261023-82cb146b-s-r1). We picked it because all four levels were run end to end on it (2026-11-02) and it ships four answer keys: retention_shift, starter_conversion, arpdau_monthly, placement_revenue. Row counts on the slide are from the duckgen API. Facilitator answers, checked against the keys on 2026-11-03: (1) level12_boss_rework (2025-04-10): Android D7 retention 14.8% to 10.9% in every channel, iOS flat at about 16.7%. (2) starter_pack_reprice (2025-05-01): paid_social conversion 2.49% to 6.27%, other channels flat at about 2.5%. (3) rewarded_chest_video (2025-06-15): ad ARPDAU May to July 1.60 to 3.69 cents on Android, 2.07 to 4.79 cents on iOS; iOS average session 600 s to 491 s, Android flat. Never show the answer keys or duckgen's guide.md to an agent."
+  },
+  {
+    "id": "ho-setup",
+    "theme": "sand",
+    "kind": "custom",
+    "title": "Hands-on 0: set up",
+    "section": "00 · TODAY · HANDS-ON",
+    "minutes": 5,
+    "exercise": "exercises/0-setup",
+    "steps": [
+      {
+        "text": "Install a coding agent, any one you like: [Claude Code](https://code.claude.com/docs/en/setup), [Codex](https://developers.openai.com/codex/cli)…"
+      },
+      {
+        "text": "Create a free [MotherDuck account](https://app.motherduck.com). No token yet: you add one in a .env file at level 3."
+      },
+      {
+        "text": "No AI subscription? Claim a key at [the minter](https://motherduck.com/minter/w/next-data-stack-has-no-ui/) and paste its exports in the terminal you start your agent from."
+      },
+      {
+        "text": "Make the workshop folder, start your agent in it, and let it install and check everything.",
+        "cmd": ["mkdir -p ~/gloamwick && cd ~/gloamwick"],
+        "prompt": "Set up my laptop for the MotherDuck workshop. Install uv with: curl -LsSf https://astral.sh/uv/install.sh | sh. Install DuckDB 1.5.6 and the MotherDuck CLI with: curl -s https://install.motherduck.com | sh. Add this line to my shell profile: export PATH=\"$HOME/.duckdb/cli/1.5.6:$PATH\". Then check that ~/.duckdb/cli/1.5.6/duckdb --version says 1.5.6, and that uv --version and motherduck --version work. Tell me what is missing."
+      }
+    ],
+    "doneWhen": "your agent reports DuckDB v1.5.6 and finds uv and the MotherDuck CLI.",
+    "needs": ["a coding agent: Claude Code, Codex…", "a free MotherDuck account"],
+    "notes": "Send exercises/0-setup/README.md before the day. People install their agent and create a MotherDuck account; one prompt has the agent install uv, DuckDB 1.5.6 and the MotherDuck CLI and add the DuckDB PATH line to the shell profile (agents start their own shells from it; restart the agent after setup). No token at setup: level 1 is local, level 2 signs in through the browser (OAuth), and levels 3 and 4 read the token from a .env at the repo root. Run by an agent, the MotherDuck installer skips its token prompt, which is fine. DuckDB 1.5.6 because MotherDuck rejects 2.0 clients (checked 2026-11-03). The minter gives an OpenRouter key with $5 for Sonnet 5.5, Haiku 5.5 and GPT-6 Luna, valid Nov 3 to Nov 30 2026. The folder is ~/gloamwick so every later path is predictable. The repo must be public before the day."
+  },
+  {
+    "id": "s01",
+    "title": "01 · What's an agent?",
+    "body": "A model that picks the next step, acts through tools, and loops.",
+    "kind": "title",
+    "theme": "duck",
+    "section": "01 · THE AGENT",
+    "notes": "0:06. Twelve minutes, talk only. Shared vocabulary for the rest of the workshop. Every definition on these slides links to its source."
+  },
+  {
+    "id": "define",
+    "theme": "sand",
+    "kind": "custom",
+    "title": "Five definitions. What do they share?",
+    "section": "01 · THE AGENT · GUESS",
+    "source": "https://simonwillison.net/2025/Sep/18/agents/",
+    "sourceLabel": "SOURCES ON EACH CARD",
+    "notes": "Read two of them, then ask the room what they all share. R highlights it: the model decides, there are tools, and there is a loop toward a goal. Willison's one-liner is the one to remember. The older textbook definition (Russell and Norvig: perceives its environment and acts on it) is left out until we check the edition we quote. Quotes checked against the source pages on 2026-11-02."
+  },
+  {
+    "id": "loop",
+    "title": "The loop",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "01 · THE AGENT",
+    "notes": "The animation plays one question through the loop, turn by turn. Click the ring to pause or resume. Turn 1: the window holds the system prompt, the tool list and the question. The model writes a tool call (list_tables). The harness runs it, the result goes back into the window. Turn 2: same loop, now with a query. Turn 3: the model has what it needs and replies in plain text. That reply has no tool call in it, so the harness has nothing to run and the loop ends. That is the only stop rule: no tool call, no next turn (plus a step cap in the harness). The model never touches the data, it only writes the next message. Anthropic describes the loop as gather context, take action, verify work, repeat. ReAct (Yao et al., 2022) is the research origin.",
+    "source": "https://claude.com/blog/building-agents-with-the-claude-agent-sdk",
+    "sourceLabel": "CLAUDE AGENT SDK · GATHER, ACT, VERIFY"
+  },
+  {
+    "id": "anatomy",
+    "title": "The parts of an agent",
+    "kind": "custom",
+    "section": "01 · THE AGENT",
+    "notes": "OpenAI's guide names three core parts: model, tools, instructions. LangChain adds the frame: agent = model + harness, where the harness is every piece of code, configuration and execution logic that isn't the model. Read the diagram left to right: a human asks, the harness builds the context, the model picks a step, a tool acts on the environment. The bottom row is what a harness like Claude Code adds. Keep this slide in mind: each level greys out what is rented and lights up what becomes yours.",
+    "theme": "sand",
+    "source": "https://www.langchain.com/blog/the-anatomy-of-an-agent-harness",
+    "sourceLabel": "LANGCHAIN · AGENT = MODEL + HARNESS"
+  },
+  {
+    "id": "window",
+    "title": "What the model sees on every turn",
+    "kind": "custom",
+    "section": "01 · THE AGENT",
+    "notes": "The model is stateless: every API call sends the whole window again, and you pay for all of it on every turn. That is the one thing to remember from this slide. Tool results are usually the biggest part, which is why returning 10,000 rows hurts. Memory files (CLAUDE.md, AGENTS.md, Claude Code's auto memory) are part of the window too: the harness loads them at session start (code.claude.com/docs/en/memory), so they cost tokens like the rest. In Claude Code, /context shows the real split. Proportions on the slide are illustrative.",
+    "theme": "sand",
+    "source": "https://code.claude.com/docs/en/memory",
+    "sourceLabel": "CLAUDE CODE DOCS · MEMORY · CONTEXT WINDOWS"
+  },
+  {
+    "id": "instructions",
+    "title": "Five places to tell an agent something",
+    "kind": "custom",
+    "section": "01 · THE AGENT",
+    "notes": "This answers 'what is a skill file vs a system prompt vs a guide'. System prompt: the app's own instructions, every turn. AGENTS.md / CLAUDE.md: repo conventions, loaded at session start. Skill: a folder with SKILL.md (and optional scripts). Only the name and description sit in the window until the agent decides it needs the body: progressive disclosure. MCP server instructions: how to use the vendor's tools. Guide: what the data means, stored in MotherDuck. The first four live with one person, one repo or one app. The guide lives with the data, so every agent with access can read it. That is chapter 2.",
+    "theme": "sand",
+    "source": "https://agentskills.io/",
+    "sourceLabel": "AGENT SKILLS · AGENTS.MD · MCP SPEC"
+  },
+  {
+    "id": "harness",
+    "title": "The harness: everything around the loop",
+    "kind": "custom",
+    "section": "01 · THE AGENT",
+    "notes": "Same model, different harness, different agent. Claude Code's harness gives permissions (allow, ask, deny), hooks (PreToolUse, PostToolUse...), a sandbox, memory files, automatic compaction and subagents. At level 4 you write a much smaller harness yourself: a tool list, a step cap and the loop, in about 60 lines of Python.",
+    "theme": "sand"
+  },
+  {
+    "id": "hook",
+    "title": "Example of a hook",
+    "kind": "code",
+    "section": "01 · THE AGENT",
+    "codeLabel": "PYTHON / .claude/hooks/guard.py · PreToolUse",
+    "language": "loop",
+    "code": "# runs before every tool call, with the call as JSON on stdin\nif is_cloud_delete(call) and not teardown_unlocked():\n    print(\"Cloud deletes are locked. Ask the human.\", file=sys.stderr)\n    exit(2)      # 2 = block the call, and the model reads why",
+    "notes": "Simplified from a guard hook in the earlier Duckoffee kit (tested, now only in the git history). In Claude Code, a PreToolUse hook that exits with code 2 blocks the tool call and its stderr goes back to the model. The model cannot talk its way past it. This is a harness rule. Level 2 adds the strongest layer, the database.",
+    "theme": "sand",
+    "source": "https://code.claude.com/docs/en/hooks",
+    "sourceLabel": "CLAUDE CODE DOCS · HOOKS"
+  },
+  {
+    "id": "levels",
+    "theme": "sand",
+    "kind": "custom",
+    "title": "Four levels. At each one you control more of the agent.",
+    "section": "01 · THE AGENT",
+    "notes": "This is the plan for the next hour. Level 1, Local: Claude Code with DuckDB and a skill, everything on your laptop. Level 2, MotherDuck: data and compute move to MotherDuck, reached through its remote MCP server, with a guide for the definitions, so anyone you share with can query. Level 3, Custom MCP: you own the tools, with your MCP server in front of MotherDuck's. Level 4, Custom agent: you own the loop and pick the model with the workshop key. Click a row to jump."
+  },
+  {
+    "id": "s-job",
+    "title": "02 · What's an agent for analytics?",
+    "body": "Text to SQL is solved. So what's left?",
+    "kind": "title",
+    "theme": "duck",
+    "section": "02 · THE ANALYTICS JOB",
+    "notes": "0:18. Eight minutes. Ask the room: if every model writes valid SQL, what is left for an analytics agent to do? Take two or three answers, then the next slide breaks the job into six tasks. Then look at which UIs it removes."
+  },
+  {
+    "id": "analytics-tasks",
+    "title": "Six tasks for an analytics agent",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "02 · THE ANALYTICS JOB · GUESS",
+    "notes": "Ask the room to shout a guess for each box before pressing R. Pipelines (ingest, transform, schedule): Flights, Python runs on MotherDuck, scheduled or on demand (free plan: on demand only). Data apps: Dives, interactive React apps over live data, saved in MotherDuck. Context: Guides (level 2). Storage: MotherDuck databases, fully managed DuckLake, and local DuckDB for the laptop part. Permissions and sandbox: per-agent Ducklings, service accounts, read-only tokens, shares with secure views (level 2); each Flight run also gets its own isolated runtime. Observability covers all five: Flight Explainer (the run viewer MCP app), query history, and traces we store ourselves (chapter 6)."
+  },
+  {
+    "id": "stack-ui",
+    "title": "Too many UIs?",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "02 · THE ANALYTICS JOB · THE NEXT DATA STACK HAS NO UI",
+    "notes": "This is the title of the workshop. Each layer of the modern data stack ships two UIs: one to build things (connectors, models, schedules, dashboards) and one to watch them run. Count the window icons: ten UIs for one metric. Ask: how many browser tabs do you open to ship one metric?"
+  },
+  {
+    "id": "ui-guess",
+    "title": "When an agent builds, which UIs survive?",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "02 · THE ANALYTICS JOB · GUESS",
+    "notes": "Let people guess before R. Building moves to chat: in data, describing the connector, the SQL, the schedule or the chart is enough, the agent writes it. Some domains still need a custom builder UI (video editing, visual design). Watching does not go away: people still need dashboards, a view of pipeline runs, and a view of what agents did."
+  },
+  {
+    "id": "mcp-apps",
+    "title": "Chat to build. MCP apps to watch.",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "02 · THE ANALYTICS JOB · MOTHERDUCK FEATURE",
+    "notes": "MotherDuck's MCP server ships MCP apps, UIs rendered inside the chat client: the Dive viewer (view_dive) and the Flight Explainer run viewer (view_flight_run, opened from run_flight). The Dive viewer renders in Claude web and desktop; other clients show a static preview with sample data (MotherDuck Dives docs). For agent traces there is no dedicated app: we store traces in MotherDuck and look at them with a Dive. Screenshots: the Dive viewer and the Flight Explainer in a chat (NOAA EU temperature demo). The traces card shows the Agent observability Dive from the gallery (OpenTelemetry GenAI spans on duckgen data); the level 3 bonus writes participants' own traces in the same shape. Demo: run a Flight from chat and watch it in the Flight Explainer, then open a Dive."
+  },
+  {
+    "id": "s-l1",
+    "theme": "duck",
+    "kind": "title",
+    "title": "Level 1 · Local",
+    "body": "DuckDB on your laptop, a managed agent, one skill file.",
+    "section": "LEVEL 1 · LOCAL",
+    "notes": "0:26. Fourteen minutes: 4 of talk, 10 of hands-on. Harness and model are rented (Claude Code, or opencode with the workshop key). You own one skill file and the data on your disk."
+  },
+  {
+    "id": "skill",
+    "title": "A skill is procedure. A guide is meaning.",
+    "kind": "code",
+    "section": "LEVEL 1 · LOCAL",
+    "codeLabel": "MARKDOWN / exercises/1-local/skills/company-analytics/SKILL.md",
+    "language": "md",
+    "code": "---\nname: company-analytics\ndescription: Answer business questions on the Gloamwick Studios\n  duckgen dataset with DuckDB, locally.\n---\n\n# Company analytics\n\nGloamwick Parquet on public S3, about 100 MB: load it whole.\n\n1. Load the tables into company.duckdb with the DuckDB CLI.\n2. Read the tables and their columns before writing SQL.\n3. Keep money in cents until the final SELECT.\n4. Show the SQL you ran under every answer.\n5. Build dashboards as one local HTML file.",
+    "notes": "Condensed from the file participants add in step 1 of hands-on 1 (the full file also has the S3 path). A skill tells the agent how to work. It is a folder with SKILL.md and optional scripts; only the name and description sit in the window until the agent needs the body. Claude Code reads skills from .claude/skills, Codex from .agents/skills, so copying it in is the first step. The skill also says where the data lives and how big it is, so the prompts stay short. At level 2 there is no skill: the MotherDuck MCP server's instructions say to call get_query_guide first, and the guide carries the meaning. Procedure (skill) vs meaning (guide).",
+    "theme": "sand"
+  },
+  {
+    "id": "ho-local",
+    "theme": "sand",
+    "kind": "custom",
+    "title": "Hands-on 1: a local analytics agent",
+    "section": "LEVEL 1 · LOCAL · HANDS-ON",
+    "minutes": 10,
+    "steps": [
+      {
+        "text": "Start your agent in your gloamwick folder and ask it to add the [skill file](https://github.com/motherduckdb/agentic-analytics-workshop-dataoutpost/blob/main/exercises/1-local/skills/company-analytics/SKILL.md). Then restart it so it loads the skill.",
+        "prompt": "Add the skill at https://raw.githubusercontent.com/motherduckdb/agentic-analytics-workshop-dataoutpost/main/exercises/1-local/skills/company-analytics/SKILL.md to this project's skills folder, as company-analytics/SKILL.md. Then tell me in one line what it does."
+      },
+      {
+        "text": "Load the data.",
+        "prompt": "Use the DuckDB CLI to load every Gloamwick table from S3 into company.duckdb, then tell me what each table holds."
+      },
+      {
+        "text": "Ask the workshop question. Write down the numbers.",
+        "prompt": "Which live-ops changes since spring 2025 moved day-7 retention or revenue per daily active user, and on which platform? Show the SQL."
+      },
+      {
+        "text": "Ask for a dashboard.",
+        "prompt": "Build dashboard.html, one file I open locally: weekly day-7 retention and revenue per daily active user by platform, with a marker on each live-ops change."
+      },
+      {
+        "text": "Open it. Who else can open it?",
+        "cmd": ["open dashboard.html"]
+      }
+    ],
+    "doneWhen": "dashboard.html opens on your laptop and shows your answer.",
+    "needs": ["a coding agent", "DuckDB 1.5.6 CLI"],
+    "notes": "Steps and prompts match exercises/1-local/README.md, which has the copy command per agent. Participants only copy prompts and watch: the skill holds the S3 path and the size (S tier, about 100 MB). Tested 2026-11-02 on Gloamwick with Claude Code through OpenRouter (Sonnet 5.5) and the DuckDB 1.4 CLI, with earlier prompt wording: 16 turns, 3.4 min, $0.38. It loaded 8 tables from S3 into company.duckdb, found the boss rework (Android D7 down, iOS flat) and the chest video (ad ARPDAU up), and wrote a working dashboard.html. Optional for fast people: /context. At the end ask: who else can open your dashboard? Nobody.",
+    "exercise": "exercises/1-local"
+  },
+  {
+    "id": "diy-boxes",
+    "theme": "sand",
+    "kind": "custom",
+    "title": "To share it, you build all of this",
+    "section": "LEVEL 1 · LOCAL",
+    "notes": "Inspired by the self-hosting DuckDB talk. A local agent is fine for you. The moment a teammate, a shop manager or another agent needs the answer, someone has to run storage, compute that isolates users, identity, access rules, context, pipelines, app hosting and observability. Pause on this slide."
+  },
+  {
+    "id": "s-l2",
+    "theme": "duck",
+    "kind": "title",
+    "title": "Level 2 · MotherDuck",
+    "body": "Same agent, data and compute in MotherDuck. Anyone you share with can query.",
+    "section": "LEVEL 2 · MOTHERDUCK",
+    "notes": "0:40. Twenty minutes. Three short hands-on: 2A connects your agent to MotherDuck and asks with the share in the prompt, 2B adds a guide and asks again, 2C turns the answer into a Dive and restyles it. Then the outro: can we manage permissions? The point of 2A and 2B: without definitions, a correct agent returns a different number than the business means."
+  },
+  {
+    "id": "md-boxes",
+    "theme": "sand",
+    "kind": "custom",
+    "title": "MotherDuck runs these boxes",
+    "section": "LEVEL 2 · MOTHERDUCK",
+    "notes": "Same boxes, run for you. Clients on the left reach MotherDuck through MCP, the motherduck CLI (query, guides, Dives, Flights) or SQL from DuckDB. In the middle, the parts this workshop uses: identity and access (service accounts, tokens, shares, secure views), Ducklings (compute per user and per agent), Guides, Flights, Dives, and storage with DuckLake. On the right, what MotherDuck reads from: object storage, databases, DuckLake on your own bucket."
+  },
+  {
+    "id": "mcp",
+    "title": "MCP: tools written once, for any agent",
+    "kind": "custom",
+    "section": "LEVEL 2 · MOTHERDUCK · MOTHERDUCK FEATURE",
+    "source": "https://modelcontextprotocol.io/docs/getting-started/intro",
+    "sourceLabel": "MODELCONTEXTPROTOCOL.IO",
+    "notes": "Model Context Protocol: a standard way for a server to expose tools (and resources and prompts) to any client. The client lists the tools, puts their definitions in the context, and calls them when the model asks. MotherDuck runs a remote MCP server at api.motherduck.com/mcp: the same tools work in Claude Code, claude.ai, ChatGPT, Cursor or your own app. Tool names on the slide are from the production server. The server also sends instructions at connect time, with client-specific guides (the repo has separate dive guides for Claude Code, claude.ai, ChatGPT and other clients).",
+    "theme": "sand"
+  },
+  {
+    "id": "ho-md",
+    "theme": "sand",
+    "kind": "custom",
+    "title": "Hands-on 2A: connect to MotherDuck",
+    "section": "LEVEL 2 · MOTHERDUCK · HANDS-ON",
+    "minutes": 5,
+    "exercise": "exercises/2a-mcp",
+    "steps": [
+      {
+        "text": "Connect your agent to the [MotherDuck MCP server](https://motherduck.com/docs/key-tasks/ai-and-motherduck/mcp-setup/) and sign in. Claude, ChatGPT, Claude Code, Codex: steps in the README."
+      },
+      {
+        "text": "Check the connection.",
+        "prompt": "List all my databases on MotherDuck."
+      },
+      {
+        "text": "Ask the question. The share is in the prompt.",
+        "prompt": "ATTACH 'md:_share/dg_gaming_gloamwick_liveops_s_82cb146b_r1/936b62ca-cd54-41a6-987d-f7b64215a773' AS gaming_gloamwick_liveops; This is fictional data for Gloamwick Studios, a free-to-play mobile game on iOS and Android. Did the starter pack price cut lift payer conversion? Split by acquisition channel, before and after. Show the SQL."
+      },
+      {
+        "text": "Write down the conversion per channel and how your agent defined “payer conversion”. Compare with your neighbor."
+      }
+    ],
+    "doneWhen": "your agent answered with a number per channel, and you know which definition it picked.",
+    "needs": ["a MotherDuck account (free)", "an AI client"],
+    "notes": "Steps and prompts match exercises/2a-mcp/README.md, which has the connect steps per client (from the MotherDuck MCP setup docs). Claude Code on an API key, like the workshop key, does not inherit claude.ai connectors, so those people use claude mcp add. Tested 2026-11-03 with a Sonnet agent on the MotherDuck MCP tools, simulating a fresh account with no guides: it found the price cut in live_ops_events (2025-05-01) and defined payer conversion as ANY purchase within 7 days of install. Headline: paid_social 3.90% to 7.59%, the other channels flat at about 3.9%. It also showed starter-pack-only conversion as a side column (2.49% to 6.27%). The story is right (only paid_social moved), the number is not the one the business means. Expect a spread in the room: any purchase vs starter pack, install cohort vs purchase date, with or without the last 7 days. Collect a few numbers, then go to the guide."
+  },
+  {
+    "id": "guides-pull",
+    "title": "How a guide reaches the agent",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "LEVEL 2 · MOTHERDUCK · MOTHERDUCK FEATURE",
+    "notes": "Read from mcp-server on origin/main. Nothing is injected into the agent's context. The agent has to ask, and the server points it there in four places: get_query_guide (its description says to call it before writing SQL), the query tool's description, list_tables and search_catalog (they return relatedGuides), and get_flight_guide / get_dive_guide (guides under the reserved flights and dives topics). Guides are SQL underneath (MD_CREATE_GUIDE, MD_LIST_GUIDES), so a custom app can load them into its system prompt instead. A guide under the flights topic is procedure: that answers 'can a guide be a harness?' for ingestion."
+  },
+  {
+    "id": "guide-md",
+    "title": "What goes in a guide",
+    "body": "Definitions, not answers.",
+    "kind": "code",
+    "theme": "sand",
+    "section": "LEVEL 2 · MOTHERDUCK",
+    "codeLabel": "MARKDOWN / A MOTHERDUCK GUIDE",
+    "language": "md",
+    "code": "# Gloamwick: how we count\n\n- _cents columns are integer USD cents. _millicents: divide by 1,000.\n- Day-7 retention = sum(d7_retained) / sum(installs), only where d7_matured.\n- ARPDAU in cents = (iap_gross_cents + ad_revenue_millicents / 1000) / dau.\n- Payer conversion for a sku = buyers of that sku / installs,\n  by install date, cohorts with 7 full days only.\n- Open-ended live-ops changes end on 9999-12-31. Compare before and after start_date.",
+    "notes": "Condensed from exercises/2b-guide/GUIDE.md, which participants use as is. Every rule was checked on 2026-11-03 against the S tier Parquet: SQL written with these rules returns the retention_shift, starter_conversion and arpdau_monthly answer keys exactly. Definitions only, no answers. Do not use duckgen's guide.md: it contains the answer SQL and the planted stories. Look at the trace: did the agent read the guide (get_query_guide, or MD_LIST_GUIDES in track B) before writing SQL?"
+  },
+  {
+    "id": "ho-guide",
+    "theme": "sand",
+    "kind": "custom",
+    "title": "Hands-on 2B: add a guide, ask again",
+    "section": "LEVEL 2 · MOTHERDUCK · HANDS-ON",
+    "minutes": 5,
+    "exercise": "exercises/2b-guide",
+    "steps": [
+      {
+        "text": "Read [GUIDE.md](https://github.com/motherduckdb/agentic-analytics-workshop-dataoutpost/blob/main/exercises/2b-guide/GUIDE.md) on GitHub. Which line would have changed your 2A answer?"
+      },
+      {
+        "text": "Create the guide: paste this line, then the whole content of [GUIDE.md](https://raw.githubusercontent.com/motherduckdb/agentic-analytics-workshop-dataoutpost/main/exercises/2b-guide/GUIDE.md) under it.",
+        "prompt": "Create a private MotherDuck guide titled \"Gloamwick: how we count\" with the text below, word for word."
+      },
+      {
+        "text": "Start a new conversation and ask the 2A question again.",
+        "prompt": "ATTACH 'md:_share/dg_gaming_gloamwick_liveops_s_82cb146b_r1/936b62ca-cd54-41a6-987d-f7b64215a773' AS gaming_gloamwick_liveops; This is fictional data for Gloamwick Studios, a free-to-play mobile game on iOS and Android. Did the starter pack price cut lift payer conversion? Split by acquisition channel, before and after. Show the SQL."
+      },
+      {
+        "text": "Compare with 2A. Did the number change? Did the agent read your guide before writing SQL?"
+      }
+    ],
+    "doneWhen": "you can say whether the guide changed your number, and which line of the guide did it.",
+    "needs": ["hands-on 2A done", "GUIDE.md, on GitHub"],
+    "notes": "Steps and prompts match exercises/2b-guide/README.md. Tested 2026-11-03 with a Sonnet agent and the guide created as a private guide: it called get_query_guide first, read 'Gloamwick: how we count', applied the payer conversion rule (starter pack buyers / installs, by install cohort, cohorts with 7 full days) and returned exactly the answer key: paid_social 2.49% to 6.27%, ad_network 2.51 to 2.51, cross_promo 2.41 to 2.47, organic 2.49 to 2.51. Same agent, same prompt, without the guide it said 3.90% to 7.59%. The line that does it: payer conversion for a sku. Ask the room who got 6.27 the second time. The test org had other guides; a participant's fresh account only has theirs, so get_query_guide finds it faster."
+  },
+  {
+    "id": "ho-dive",
+    "theme": "sand",
+    "kind": "custom",
+    "title": "Hands-on 2C: build a Dive, give it a style",
+    "section": "LEVEL 2 · MOTHERDUCK · HANDS-ON",
+    "minutes": 5,
+    "exercise": "exercises/2c-dive",
+    "steps": [
+      {
+        "text": "Ask for a Dive.",
+        "prompt": "Save a Dive that charts weekly starter pack conversion by acquisition channel, with a marker on the price cut. Give me the link."
+      },
+      {
+        "text": "Open it, in the chat if your client shows it there, or with the link."
+      },
+      {
+        "text": "Pick a theme in the [Dive theme gallery](https://motherduck.com/docs/key-tasks/dives/dive-theme-gallery/), then paste this line and the theme's prompt under it.",
+        "prompt": "Restyle my Dive with the theme below. Keep the same data and charts."
+      },
+      {
+        "text": "Open the new version and compare. Every save is a new version of the same Dive."
+      }
+    ],
+    "doneWhen": "your Dive opens in MotherDuck with the new style.",
+    "needs": ["hands-on 2B done", "the theme gallery"],
+    "notes": "Steps and prompts match exercises/2c-dive/README.md. The theme gallery (docs: key-tasks/dives/dive-theme-gallery) has 15 themes, each one a ready prompt: Tufte Minimal, Ink & Paper, Corporate Dashboard, FT Salmon, Soft Infographic, Du Bois and more. In Claude on the web or desktop the Dive opens in the chat (the Dive viewer MCP app, slide 'Chat to build. MCP apps to watch.'); other clients get a link. Run 2026-11-03 with these prompts in Claude Code: it saved the Dive through the MCP, and the FT Salmon restyle saved a new version. Ask two or three people to show their theme on the projector."
+  },
+  {
+    "id": "hypertenancy",
+    "title": "One Duckling per agent",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "LEVEL 2 · MOTHERDUCK · MOTHERDUCK FEATURE",
+    "source": "https://motherduck.com/docs/concepts/hypertenancy",
+    "sourceLabel": "MOTHERDUCK DOCS · HYPERTENANCY",
+    "notes": "Hypertenancy: every user, service account or agent gets its own Duckling. At level 4 the agent you ship gets its own service account, so it gets its own Duckling too. Clean cost attribution per agent, and revoking one token stops one agent. Read scaling serves many end users through one service account with read-only Ducklings. Demo: an agent hammers heavy queries on its own account while a dashboard on another account keeps its speed. TODO: script the demo."
+  },
+  {
+    "id": "secure-anim",
+    "title": "Can we manage permissions?",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "LEVEL 2 · MOTHERDUCK · MOTHERDUCK FEATURE",
+    "source": "https://motherduck.com/docs/key-tasks/sharing-data/secure-views/",
+    "sourceLabel": "MOTHERDUCK DOCS · SECURE VIEWS",
+    "notes": "Outro of level 2, mostly talk. Ask the room first: now that anyone can query through an agent, can we control what each one sees? The animation answers: a secure view, defined once by the data owner, applies three rules in the database for every query: a WHERE clause keeps some rows (row-level security), a column left out of the SELECT does not exist for the consumer (column-level security), an expression replaces a column's values (masking). It holds for every agent and person behind the share, whatever the prompt says. The next slide is the same idea as SQL on Gloamwick. This is admin work, and it sets up level 3: your own MCP server runs with a token you pick, so it inherits these rules."
+  },
+  {
+    "id": "secure-view",
+    "title": "Channel leads see their channel",
+    "kind": "code",
+    "theme": "sand",
+    "section": "LEVEL 2 · MOTHERDUCK · MOTHERDUCK FEATURE",
+    "codeLabel": "SQL / MOTHERDUCK SECURE VIEW",
+    "language": "sql",
+    "code": "CREATE SHARE gloamwick_channel_leads FROM gloamwick (ACCESS RESTRICTED)\nWITH SECURE VIEW REPLACES purchases AS (\n    SELECT purchase_id, player_id, platform, acquisition_channel,\n           sku, purchase_date, price_cents   -- no store fees, no net revenue\n    FROM purchases\n    WHERE acquisition_channel IN (\n        SELECT acquisition_channel FROM channel_access WHERE member = current_user\n    )\n);",
+    "source": "https://motherduck.com/docs/key-tasks/sharing-data/secure-views/",
+    "sourceLabel": "MOTHERDUCK DOCS · SECURE VIEWS",
+    "notes": "Written from the docs. Row filter by acquisition channel, store_fee_cents and net_revenue_cents left out (hidden columns do not exist for the consumer: SELECT store_fee_cents fails as missing). Column names are from the Gloamwick purchases table. channel_access is a table we would add. Service accounts have no email, so agents are matched with current_user. Secure views need Business or Enterprise (trials count): we run this in the devrel org and participants only query the share. Managing secure views with SQL needs DuckDB 1.5.6+, consumers need 1.5.5+ for every query shape. EXPLAIN hides the filter and copies of the share stay filtered."
+  },
+  {
+    "id": "s-l3",
+    "theme": "duck",
+    "kind": "title",
+    "title": "Level 3 · Custom MCP",
+    "body": "Your own MCP server, your tools, your token.",
+    "section": "LEVEL 3 · CUSTOM MCP",
+    "notes": "1:00. Twelve minutes. You are the admin now. Your own MCP server decides which tools exist (including ones only you have), what they are called, what gets logged, and which token reaches MotherDuck. That token carries the rules from the end of level 2. This is how a product ships MotherDuck to its users."
+  },
+  {
+    "id": "fears",
+    "title": "What stops teams from shipping AI on data",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "LEVEL 3 · CUSTOM MCP · GUESS",
+    "notes": "Ask the room first: what would stop you from giving an agent access to your warehouse? Then map each fear to a control. Masking also limits what reaches the model provider: if the agent only sees masked values, that is all that can leave in a prompt."
+  },
+  {
+    "id": "rules",
+    "title": "Where to put a rule",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "LEVEL 3 · CUSTOM MCP",
+    "notes": "Four places, weakest to strongest. The message of the whole workshop: guides for correctness, the database for safety. People who hesitate want to hear that the fence does not depend on the model behaving."
+  },
+  {
+    "id": "white-label",
+    "theme": "sand",
+    "kind": "custom",
+    "title": "Own the tool surface, and the token",
+    "section": "LEVEL 3 · CUSTOM MCP · MOTHERDUCK PATTERN",
+    "source": "https://motherduck.com/docs/key-tasks/ai-and-motherduck/mcp-workflows/white-label-mcp-server/",
+    "sourceLabel": "MOTHERDUCK DOCS · WHITE-LABEL MCP SERVER",
+    "notes": "From the MotherDuck white-label guide. Your server proxies the remote MCP server over streamable HTTP with a bearer token. It forwards a small set (query, list_tables, list_columns, the guide read tools) under your names, drops query_rw and Flight tools, and adds tools only you have: live_ops_impact holds the SQL for the weekly question. A required question parameter is logged with the SQL. Local vs remote: the hands-on server runs locally over stdio, so the agent on your laptop starts it (Claude Code, Codex, Cursor). claude.ai on the web and ChatGPT only take remote servers, so a product deploys it. The token: the server calls MotherDuck with whatever MOTHERDUCK_TOKEN holds and never shows it. Give it a service account (all plans; free allows two) and users get that account's rights: only the shares granted, read-only with read scaling tokens (paid plans), rows and columns cut by a secure view on the share (Business or Enterprise). One service account per tenant also gives one Duckling per tenant. The doc's example uses FastMCP 4.0.3."
+  },
+  {
+    "id": "custom-tool",
+    "title": "A tool only your server has",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "LEVEL 3 · CUSTOM MCP",
+    "notes": "The snippet is live_ops_impact from exercises/3-custom-mcp/server.py, shortened. The tool carries the SQL for a question the business asks every week, with the guide's rules baked in, so the agent calls one tool instead of exploring tables: 5 turns instead of 16 to 18 in the 2026-11-02 runs. The question is a required argument, so every call is logged with its SQL. The list on the right is ideas, not code in the repo: any repeated question, any definition, any action (posting to Slack) can become a tool, and it only exists for agents that use your server."
+  },
+  {
+    "id": "ho-tools",
+    "theme": "sand",
+    "kind": "custom",
+    "title": "Hands-on 3: your own MCP server",
+    "section": "LEVEL 3 · CUSTOM MCP · HANDS-ON",
+    "minutes": 10,
+    "steps": [
+      {
+        "text": "Clone the repo and fill in .env ([token](https://app.motherduck.com/settings/tokens), [OpenRouter key](https://motherduck.com/minter/w/next-data-stack-has-no-ui/)). Then ask about the server.",
+        "cmd": [
+          "cd ~/gloamwick && git clone https://github.com/motherduckdb/agentic-analytics-workshop-dataoutpost.git",
+          "cd agentic-analytics-workshop-dataoutpost && cp .env.example .env"
+        ],
+        "prompt": "Explain agentic-analytics-workshop-dataoutpost/exercises/3-custom-mcp/server.py in five lines: its tools, the one that only exists here, where the token comes from, what it logs."
+      },
+      {
+        "text": "Start the server in a second terminal. It reads .env and serves http://127.0.0.1:8000/mcp.",
+        "cmd": [
+          "cd ~/gloamwick/agentic-analytics-workshop-dataoutpost/exercises/3-custom-mcp && uv run server.py"
+        ]
+      },
+      {
+        "text": "Add it to your agent (Claude Code, then Codex), and restart the agent.",
+        "cmd": [
+          "claude mcp add --scope user --transport http company-data http://127.0.0.1:8000/mcp",
+          "codex mcp add company-data --url http://127.0.0.1:8000/mcp"
+        ]
+      },
+      {
+        "text": "Ask with your tools only. Watch for live_ops_impact: only your server has it.",
+        "prompt": "Use only the company-data tools. Which live-ops changes since spring 2025 moved day-7 retention or revenue per daily active user, and on which platform? Show the SQL."
+      },
+      {
+        "text": "Look at what your server logged, with DuckDB.",
+        "prompt": "Use the DuckDB CLI to show agentic-analytics-workshop-dataoutpost/exercises/3-custom-mcp/questions.jsonl as a table: time, question and outcome."
+      },
+      {
+        "text": "Bonus: restart the server with traces, ask again, then build a Dive over them.",
+        "cmd": ["TRACE_TO_MOTHERDUCK=1 uv run server.py"],
+        "prompt": "Build a Dive over workshop_traces like the Agent observability Dive in the MotherDuck Dive gallery: the traces from agent_traces, and the run tree of one trace from spans."
+      }
+    ],
+    "doneWhen": "your agent answered with your tools only, it called live_ops_impact, and you saw your question log as a table.",
+    "needs": [
+      "git",
+      "Claude Code, Codex or Cursor",
+      "a MotherDuck token and your OpenRouter key, in .env"
+    ],
+    "notes": "Steps and prompts match exercises/3-custom-mcp/README.md. First clone of the repo, and the .env: cp .env.example .env, then MOTHERDUCK_TOKEN and OPENROUTER_API_KEY. server.py and agent.py read it from the repo root whatever folder they run in; the server only takes the MotherDuck values, so the OpenRouter key never reaches it. Tested 2026-11-03 with no keys in the environment: the server read the token from .env and live_ops_impact returned rows; agent.py ran end to end from .env. --scope user so Claude Code sees the server whatever folder it starts in. The server now serves HTTP on a fixed address, http://127.0.0.1:8000/mcp (PORT to change it), so adding it is one predictable command per agent: claude mcp add --transport http, or codex mcp add --url. Tested 2026-11-03: the server starts over HTTP, lists its six tools, live_ops_impact returns real Gloamwick rows from MotherDuck, the question log is written, and with TRACE_TO_MOTHERDUCK=1 the call lands as an execute_tool span (932 ms). Earlier run (2026-11-02, stdio, Claude Code): 5 turns, 28 s, $0.07, against 16 to 18 turns at levels 1 and 2. Step 5 reads the JSONL log with DuckDB, which sets up step 6: the same idea as OpenTelemetry spans in MotherDuck, then a Dive like the gallery's Agent observability. Step 6 needs the MotherDuck MCP server from 2A in the agent.",
+    "exercise": "exercises/3-custom-mcp"
+  },
+  {
+    "id": "bonus-traces",
+    "title": "Bonus: trace your agent into MotherDuck",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "LEVEL 3 · CUSTOM MCP · BONUS",
+    "source": "https://motherduck.com/dive-gallery/dives/agent-observability",
+    "sourceLabel": "DIVE GALLERY · AGENT OBSERVABILITY",
+    "notes": "Bonus for fast people: step 6 of hands-on 3, and the bonus in exercises/4-custom-agent/README.md. traces.py (next to server.py) turns each run into OpenTelemetry GenAI spans: invoke_agent for the run, chat for each model call (tokens and cost from OpenRouter's usage), execute_tool for each tool call. A small exporter writes them as rows to workshop_traces.spans in the participant's own MotherDuck account, with the same columns as the spans table behind the Agent observability Dive in the gallery (insurance_brightholm_agent_ops, a duckgen dataset), plus question and sql. agent_traces is a view with one row per trace. Off unless TRACE_TO_MOTHERDUCK=1. Level 3 only sees tool calls, because the model runs inside Claude Code or Codex. Level 4 owns the loop, so it traces everything. Then one prompt builds a Dive like the gallery one, or copy the gallery Dive and point it at workshop_traces. Same pattern as /try and duckgen, which write their spans to llm_obs in MotherDuck. Tested 2026-11-03 against a local DuckDB file with real runs: the level 3 server over HTTP (one execute_tool span, 932 ms) and agent.py on GPT-6 Luna (12 spans, 20.6k/3.1k tokens, $0.0028). Not yet written to MotherDuck itself."
+  },
+  {
+    "id": "s-l4",
+    "theme": "duck",
+    "kind": "title",
+    "title": "Level 4 · Custom agent",
+    "body": "Your loop, your model. In Python, or in the browser.",
+    "section": "LEVEL 4 · CUSTOM AGENT",
+    "notes": "1:12. Twelve minutes. The last rented parts were the harness and the model. Here you own both: the loop is about 60 lines, the model is any of the three models the workshop key allows. Hands-on 4 has two paths: path A is agent.py on the workshop key, path B is Agent Builder in the browser with the Dive Keeper template."
+  },
+  {
+    "id": "loop-code",
+    "title": "The whole agent, really",
+    "kind": "code",
+    "theme": "sand",
+    "section": "LEVEL 4 · CUSTOM AGENT",
+    "codeLabel": "PYTHON / exercises/4-custom-agent/agent.py (core)",
+    "language": "loop",
+    "code": "messages = [system, question]\nloop step in range(MAX_STEPS):\n    reply = model(messages, tools)        # GPT-6 Luna by default\n    messages += [reply]\n    if not reply.tool_calls:\n        return reply.content\n    for call in reply.tool_calls:\n        result = mcp.call_tool(call.name, call.args)   # your MCP server\n        messages += [tool_result(call.id, result)]",
+    "notes": "Press H to walk the lines. This is the core of exercises/4-custom-agent/agent.py, tested 2026-11-02 with Gemini 3.8 Flash and 2026-11-03 with openai/gpt-6-luna, the default and the cheapest model the workshop key allows. Everything else in the file is plumbing: turn MCP tools into the model's tool format, start the server with the token, cap the steps. Notice what is not here: no permissions, no hooks, no memory. That is the harness you now own."
+  },
+  {
+    "id": "knobs",
+    "title": "Build your agent",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "LEVEL 4 · CUSTOM AGENT · DEMO",
+    "notes": "Presenter demo of Agent Builder (motherduck.com/labs/agent-builder), also path B of hands-on 4. Each row is a setting on its Build page, and each is one component of an analytics agent. Show: the Build page, Prepare the simulation, the Dive, a Preview run with its trace, and the same run in MotherDuck (Open the run in MotherDuck)."
+  },
+  {
+    "id": "redteam",
+    "title": "Demo: break an agent",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "LEVEL 4 · CUSTOM AGENT · DEMO",
+    "notes": "Presenter demo with two deployed agents, if the generator and the secure view exist. Agent A has the rule in its system prompt. Agent B runs as a channel lead through the secure view. The room shouts attacks: get other channels' numbers or the store fees out of each. A is likely to leak, B cannot. Collect the best attacks for the wrap."
+  },
+  {
+    "id": "traces",
+    "title": "Every agent, one table",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "LEVEL 4 · CUSTOM AGENT · MOTHERDUCK FEATURE",
+    "notes": "The Flight Explainer covers pipeline runs. For agents, write every run as OpenTelemetry GenAI spans to a MotherDuck table (the level 3 and 4 bonus does it with traces.py, the way duckgen and /try write to llm_obs), then a Dive reads it: the Agent observability Dive in the gallery shows a run tree, tool calls, silent failures, tokens and cost per case. For the room: who read the guide, who matched the answer key, what each run cost. The answer keys are the evals.",
+    "source": "https://motherduck.com/dive-gallery/dives/agent-observability",
+    "sourceLabel": "DIVE GALLERY · AGENT OBSERVABILITY"
+  },
+  {
+    "id": "ho-agent",
+    "theme": "sand",
+    "kind": "custom",
+    "title": "Hands-on 4, path A: your own loop",
+    "section": "LEVEL 4 · CUSTOM AGENT · HANDS-ON",
+    "minutes": 10,
+    "steps": [
+      {
+        "text": "Go to the level 4 folder. agent.py reads your OpenRouter key and the model from the same .env.",
+        "cmd": ["cd ~/gloamwick/agentic-analytics-workshop-dataoutpost/exercises/4-custom-agent"]
+      },
+      {
+        "text": "Run your agent with the workshop question as its argument.",
+        "cmd": ["uv run agent.py"],
+        "prompt": "Which live-ops changes since spring 2025 moved day-7 retention or revenue per daily active user, and on which platform? Show the SQL."
+      },
+      {
+        "text": "Read the [step N] lines. Which tools did it call? Did it call how_we_count first?"
+      },
+      {
+        "text": "Swap the model, run again, compare steps and numbers.",
+        "cmd": ["MODEL=anthropic/claude-haiku-5.5 uv run agent.py"]
+      },
+      {
+        "text": "Change the harness: MAX_STEPS=2, or edit SYSTEM in agent.py. What breaks first?"
+      }
+    ],
+    "doneWhen": "your agent answers the question on the model you picked, and you can say which tools it called.",
+    "needs": ["the .env from level 3", "uv"],
+    "notes": "Steps match exercises/4-custom-agent/README.md. agent.py reads OPENROUTER_API_KEY and MODEL from the repo's .env (an exported variable wins), and tells the server not to trace so a traced run is not counted twice. Tested 2026-11-03 on openai/gpt-6-luna, the workshop key's default: the workshop question answered in 38 s, 3 steps, 7 tool calls (list_company_tables, how_we_count, live_ops_impact, read_definition, describe_table x2, ask_data). It found the boss rework (Android D7 14.48% to 10.68%, iOS flat) and the chest video (ARPDAU +2 cents on both platforms); one table cell had a garbled unit, Luna is less careful with formatting than Sonnet. With TRACE_TO_MOTHERDUCK=1 the run wrote 12 spans: 20.6k input and 3.1k output tokens, $0.0028. agent.py starts the level 3 server itself, over stdio (server.py --stdio). The OpenRouter key never reaches the server, the MotherDuck token never reaches the model. Path B, for anyone without a working level 3 or who wants a bigger harness: Agent Builder in the browser with the Dive Keeper template (README, Path B): simulate the data, look at the Dive, run the agent, move the data forward, run again. For learning, not production. What the agent should do each week is in PLAN.md (The generator, Agent Builder).",
+    "exercise": "exercises/4-custom-agent"
+  },
+  {
+    "id": "ho-agent-builder",
+    "theme": "sand",
+    "kind": "custom",
+    "title": "Hands-on 4, path B: Agent Builder",
+    "section": "LEVEL 4 · CUSTOM AGENT · HANDS-ON",
+    "minutes": 10,
+    "steps": [
+      { "text": "Open [Agent Builder](https://motherduck.com/labs/agent-builder), sign in with MotherDuck, New agent, Dive Keeper template." },
+      { "text": "Build, step 1 Access: paste your OpenRouter key." },
+      { "text": "Simulate the data: Build, step 2, Prepare the simulation." },
+      { "text": "Look at the Dive before the agent runs: click its title." },
+      { "text": "Run the agent: Preview run. Read the trace, then the flags on the Dive." },
+      { "text": "Move the data forward, run again. Review the change it proposes on History." },
+      { "text": "Compare with agent.py: which of these checks would you add to your loop first?" }
+    ],
+    "doneWhen": "you looked at the Dive before the first run, the agent's findings are on it, and the agent ran again on a week you moved forward.",
+    "needs": ["a MotherDuck account", "your OpenRouter key"],
+    "notes": "Path B of hands-on 4, for anyone without a working level 3 or who wants a bigger harness. Steps match the Path B section of exercises/4-custom-agent/README.md (the build checks it through readmeSection). Agent Builder runs the same loop as agent.py with a bigger harness: it pre-checks every query of the Dive, keeps edits in a draft, blocks writes to any other Dive, caps steps, tokens, cost and time, verifies the draft and asks for approval. Every run is a MotherDuck Flight in the participant's account; Open the run in MotherDuck shows it step by step. Prepare the simulation copies Gloamwick into agent_builder_sim_<id> with data up to 2025-03-30 and saves the Dive. The first run is the baseline and flags up to 3 findings. What the agent should do each week is in PLAN.md (The generator, Agent Builder): the first change to review is expected at the web launch (2025-05-12). About $0.002 to $0.005 per run on openai/gpt-6-luna. For learning, not production.",
+    "exercise": "exercises/4-custom-agent",
+    "readmeSection": "Path B: Agent Builder in the browser"
+  },
+  {
+    "id": "level-runs",
+    "title": "One question, four levels",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "WRAP",
+    "notes": "Measured on 2026-11-02, one run each, same question on Gloamwick Studios: which live-ops changes moved retention and ARPDAU? Levels 1 to 3 ran Claude Code with Sonnet 5.5 through OpenRouter, level 4 our own loop with Gemini 3.8 Flash. The domain tool at level 3 cut the turns and the cost by a factor of 3 to 5. The guide written at level 2 made the level 4 run, on another model, return the same numbers. One run each, so treat these as an illustration, not a benchmark."
+  },
+  {
+    "id": "full-agent",
+    "title": "What makes a full agent",
+    "kind": "custom",
+    "section": "WRAP",
+    "notes": "Recap. Click a line to jump to the level that answered it. Most demos stop at line 1: a model with a SQL tool. Production needs all six.",
+    "theme": "sand"
+  },
+  {
+    "id": "agent-signup",
+    "title": "Did you know? Agents can sign up to MotherDuck too",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "WRAP",
+    "source": "https://motherduck.com/docs/key-tasks/ai-and-motherduck/agent-account-signup/",
+    "sourceLabel": "MOTHERDUCK DOCS · CREATE AND CLAIM ACCOUNTS FOR AI AGENTS",
+    "notes": "From the MotherDuck docs page 'Create and claim accounts for AI agents'. One POST to new.motherduck.com, no body, creates a free organization owned by a service account and returns motherduck_token, claim_org_url, how_to_use_motherduck (plain-language instructions written for the agent to read: install the DuckDB CLI, connect with md:, where the Dive docs are) and region. The MotherDuck CLI wraps it as motherduck new and saves the token. The agent connects with duckdb md: and works. When the work is worth keeping, a human opens claim_org_url, signs up or in, and owns the organization. It does not merge into an organization you already own. Some agent sandboxes block outbound HTTPS, which blocks the call. Segue: an agent can now set up its own data stack. So what should humans still operate?"
+  },
+  {
+    "id": "humans",
+    "title": "What should humans still operate?",
+    "body": "Definitions, identities and the off switch. What else?",
+    "kind": "statement",
+    "theme": "ink",
+    "section": "WRAP",
+    "notes": "1:24. Open discussion and Q&A, then teardown: links expire, temporary keys are revoked, service accounts are deleted."
+  },
+  {
+    "id": "refs",
+    "theme": "sand",
+    "kind": "custom",
+    "title": "References",
+    "section": "WRAP",
+    "notes": "Every definition in chapter 1 comes from these. Links open in a new tab."
+  },
+  {
+    "id": "thanks",
+    "title": "Thanks!",
+    "kind": "custom",
+    "theme": "sand",
+    "section": "THANK YOU",
+    "notes": "Leave up during Q&A. Ask everyone to fill the 3-minute survey: forms.gle/8uFGZP6pFDuZkafU6 (the link is clickable on the slide)."
+  }
+]

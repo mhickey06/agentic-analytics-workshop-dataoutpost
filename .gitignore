@@ -1,0 +1,21 @@
+# local warehouses
+*.duckdb
+*.duckdb.wal
+
+# agent trace, ledger, teardown lock
+.workshop/
+
+# python
+.venv/
+__pycache__/
+
+# slides build
+slides/node_modules/
+slides/dist/
+
+# secrets
+.env
+.env.*
+!.env.example
+
+questions.jsonl

@@ -1,0 +1,1939 @@
+/* Workshop visuals, on top of deck.css (copied unchanged from the Jev for analytics deck). */
+
+.ws-slide > .ws-visual {
+  margin-block: auto;
+}
+.ws-visual h2 {
+  font:
+    40px AeonikMono,
+    monospace;
+  margin: 14px 0 10px;
+}
+.ws-visual code {
+  font:
+    19px AeonikMono,
+    monospace;
+  background: #fff;
+  border: 1px solid #38383840;
+  padding: 4px 10px;
+}
+.ws-small {
+  font-size: 19px;
+  color: #666;
+}
+.ws-caption {
+  font-size: 24px;
+  margin: 26px 0 0;
+  text-align: center;
+}
+
+/* Cover and thanks */
+.hero-slide .eyebrow,
+.ws-slide.custom:has(.ws-hero) .eyebrow {
+  display: none;
+}
+.ws-hero {
+  width: 1390px;
+  height: 660px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+}
+.ws-hero h2 {
+  font:
+    normal 110px/1.02 AeonikMono,
+    monospace;
+  letter-spacing: -3px;
+  margin: 26px 0 30px;
+}
+.ws-hero p {
+  font-size: 30px;
+  margin: 0 0 14px;
+  max-width: 820px;
+}
+.ws-hero .ws-names {
+  font:
+    24px AeonikMono,
+    monospace;
+  color: #087f72;
+  margin-top: 30px;
+}
+.ws-hero img {
+  height: 520px;
+  max-width: 460px;
+  object-fit: contain;
+}
+
+/* Agenda: 3 x 2 clickable chapters */
+.ws-agenda {
+  width: 1390px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.ws-agenda-row {
+  display: grid;
+  gap: 26px;
+}
+.ws-agenda-ideas {
+  grid-template-columns: repeat(2, 1fr);
+}
+.ws-agenda-levels {
+  grid-template-columns: repeat(4, 1fr);
+}
+.ws-agenda .ws-agenda-ideas button {
+  height: 190px;
+}
+.ws-agenda .ws-agenda-levels button {
+  height: 270px;
+}
+.ws-agenda .ws-agenda-ideas h2 {
+  margin-top: 18px;
+}
+.ws-agenda .ws-agenda-levels h2 {
+  font-size: 34px;
+  margin-top: 20px;
+}
+.ws-agenda-band {
+  margin-top: 30px;
+}
+.ws-agenda-ho {
+  margin-top: auto;
+  align-self: flex-start;
+  font:
+    18px AeonikMono,
+    monospace;
+  padding: 6px 12px;
+  background: var(--sun);
+  border: 2px solid var(--ink);
+}
+.ws-agenda-ho:hover {
+  background: #fff;
+}
+.ws-agenda button {
+  position: relative;
+  text-align: left;
+  height: 230px;
+  padding: 22px 26px;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid #38383840;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.ws-agenda button:hover {
+  background: #fff4ae;
+}
+.ws-agenda .agenda-number {
+  font-size: 56px;
+  line-height: 1;
+}
+.ws-agenda .concept-icon {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  width: 64px;
+  height: 64px;
+}
+.ws-agenda h2 {
+  font-size: 38px;
+  margin: 26px 0 8px;
+}
+.ws-agenda p {
+  font-family: Inter, Arial, sans-serif;
+  font-size: 21px;
+  color: #666;
+  margin: 0;
+}
+
+/* Boxes and arrows */
+.ws-node {
+  background: #fff;
+  border: 2px solid var(--ink);
+  box-shadow: -9px 9px 0 var(--ink);
+  padding: 22px 26px;
+}
+.ws-node p {
+  font-size: 24px;
+  margin: 8px 0 0;
+}
+.ws-node.ws-strong {
+  background: var(--sun);
+}
+.ws-node.ws-soft {
+  background: transparent;
+  box-shadow: none;
+  border-style: dashed;
+}
+.ws-arrow {
+  font:
+    54px AeonikMono,
+    monospace;
+}
+
+/* The loop */
+.ws-loop {
+  width: 1390px;
+  display: grid;
+  grid-template-columns: 1fr auto 1.2fr auto 1fr;
+  align-items: center;
+  gap: 28px;
+}
+.ws-cycle {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.ws-cycle-arrows {
+  display: flex;
+  justify-content: space-around;
+  font:
+    20px AeonikMono,
+    monospace;
+  color: #087f72;
+}
+.ws-loop-around {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 46px;
+  font:
+    20px AeonikMono,
+    monospace;
+  letter-spacing: 1px;
+}
+.ws-loop-around span {
+  border-top: 2px solid var(--ink);
+  padding-top: 12px;
+}
+
+/* DuckDB agent mode */
+.ws-mode {
+  width: 1390px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.8fr;
+  gap: 40px;
+  align-items: start;
+}
+.ws-term pre {
+  background: #fff;
+  border: 2px solid var(--ink);
+  box-shadow: -9px 9px 0 var(--ink);
+  margin-top: 14px;
+  /* AeonikMono has no box-drawing glyphs, so the terminal mocks use a system mono. */
+  font:
+    20px/1.3 Menlo,
+    'DejaVu Sans Mono',
+    monospace;
+}
+.ws-term ul {
+  font-size: 22px;
+  margin: 22px 0 0;
+  padding-left: 26px;
+}
+.ws-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 40px;
+}
+.ws-stat strong {
+  font:
+    120px/1 AeonikMono,
+    monospace;
+  color: #087f72;
+}
+.ws-stat span {
+  font-size: 22px;
+}
+
+/* Guides */
+.ws-guides {
+  width: 1390px;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 60px;
+  align-items: center;
+}
+.ws-guide-card .concept-icon {
+  width: 72px;
+  height: 72px;
+  display: block;
+  margin-bottom: 10px;
+}
+.ws-doors {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.ws-door {
+  display: grid;
+  grid-template-columns: 430px 1fr;
+  gap: 20px;
+  align-items: center;
+  border-top: 1px solid #38383840;
+  padding-top: 16px;
+  font-size: 22px;
+}
+.ws-door code {
+  justify-self: start;
+}
+
+/* Tables */
+.ws-table {
+  width: 1390px;
+  border-collapse: collapse;
+  font-size: 23px;
+  background: #fff;
+  border: 2px solid var(--ink);
+  box-shadow: -9px 9px 0 var(--ink);
+}
+.ws-table th {
+  text-align: left;
+  font:
+    17px AeonikMono,
+    monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: #e9e2d8;
+  border-bottom: 2px solid var(--ink);
+  padding: 12px 20px;
+}
+.ws-table td {
+  padding: 12px 20px;
+  border-bottom: 1px solid #38383825;
+}
+.ws-table td:first-child {
+  font-weight: 600;
+}
+
+/* Hypertenancy */
+.ws-ducklings {
+  width: 1390px;
+}
+.ws-duckling-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 34px;
+}
+.ws-duckling {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ws-duckling strong {
+  font:
+    32px AeonikMono,
+    monospace;
+}
+.ws-duckling .ws-node {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 22px;
+  margin-top: 10px;
+}
+.ws-duckling .concept-icon {
+  width: 56px;
+  height: 56px;
+}
+.ws-storage {
+  margin-top: 40px;
+  padding: 18px;
+  text-align: center;
+  background: var(--ink);
+  color: var(--sand);
+  font:
+    20px AeonikMono,
+    monospace;
+  letter-spacing: 2px;
+}
+
+/* Four places to put a rule */
+.ws-rules {
+  width: 1390px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 26px;
+  align-items: start;
+}
+.ws-rule {
+  border-top: 4px solid var(--ink);
+  padding-top: 14px;
+}
+.ws-rule:last-child {
+  border-top-color: #087f72;
+}
+.ws-rule .agenda-number {
+  font-size: 44px;
+}
+.ws-rule p {
+  font-size: 22px;
+  margin: 0;
+}
+
+/* Red team */
+.ws-redteam {
+  width: 1390px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+.ws-redteam h2 {
+  font-size: 34px;
+}
+.ws-redteam code {
+  display: block;
+  line-height: 1.45;
+  padding: 8px 12px;
+}
+.ws-attacks p {
+  font-size: 24px;
+  border-left: 4px solid var(--coral);
+  padding-left: 16px;
+  margin: 16px 0;
+}
+
+/* Chapter 1: anatomy of an agent */
+.ws-span {
+  grid-column: 1 / -1;
+}
+.ws-table-tight {
+  font-size: 21px;
+}
+.ws-table-tight td {
+  padding: 10px 18px;
+}
+.ws-row-strong td {
+  background: var(--sun);
+}
+
+.ws-window {
+  width: 1390px;
+}
+.ws-window-bar {
+  display: flex;
+  height: 170px;
+  border: 2px solid var(--ink);
+  box-shadow: -9px 9px 0 var(--ink);
+}
+.ws-window-bar > div {
+  display: flex;
+  align-items: flex-end;
+  padding: 12px;
+  border-right: 2px solid var(--ink);
+  font:
+    17px/1.2 AeonikMono,
+    monospace;
+  min-width: 0;
+}
+.ws-window-bar > div:last-child {
+  border-right: 0;
+}
+.ws-window-notes {
+  margin-top: 44px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 50px;
+  font-size: 24px;
+}
+.ws-window-notes p {
+  margin: 0;
+}
+.ws-window-notes .ws-small {
+  grid-column: 1 / -1;
+}
+
+.ws-mcp {
+  width: 1390px;
+  display: grid;
+  grid-template-columns: 300px 200px 1fr;
+  gap: 30px;
+  align-items: center;
+}
+.ws-mcp-clients {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ws-chip {
+  border: 2px solid var(--ink);
+  background: #fff;
+  padding: 10px 16px;
+  font:
+    21px AeonikMono,
+    monospace;
+}
+.ws-mcp-wire {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font:
+    18px AeonikMono,
+    monospace;
+  color: #087f72;
+}
+.ws-mcp-server .ws-door {
+  grid-template-columns: 140px 1fr;
+}
+.ws-mcp-server .ws-door strong {
+  font:
+    22px AeonikMono,
+    monospace;
+}
+
+.ws-harness {
+  width: 1390px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 34px 40px;
+}
+.ws-harness h2 {
+  font-size: 32px;
+}
+
+.ws-full {
+  width: 1390px;
+  display: flex;
+  flex-direction: column;
+}
+.ws-full button {
+  display: grid;
+  grid-template-columns: 90px 1fr 260px;
+  align-items: center;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid #38383840;
+  padding: 14px 10px;
+  font:
+    30px Inter,
+    Arial,
+    sans-serif;
+  cursor: pointer;
+}
+.ws-full button:hover {
+  background: #fff4ae;
+}
+.ws-full .agenda-number {
+  font-size: 34px;
+}
+.ws-full em {
+  font:
+    normal 20px AeonikMono,
+    monospace;
+  color: #666;
+  text-align: right;
+}
+
+/* Guess slides */
+.ws-guess {
+  display: inline-block;
+  font:
+    18px AeonikMono,
+    monospace;
+  color: #999;
+  border: 1px dashed #999;
+  padding: 2px 10px;
+}
+.ws-reveal {
+  position: absolute;
+  right: 105px;
+  top: 76px;
+}
+.ws-md {
+  font:
+    20px/1.35 AeonikMono,
+    monospace;
+  color: #087f72;
+  margin-top: 12px;
+}
+
+/* The analytics job */
+.ws-job {
+  width: 1390px;
+}
+.ws-job-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 22px;
+}
+.ws-job-row .ws-node {
+  padding: 18px 20px;
+  min-height: 250px;
+}
+.ws-job h2 {
+  font-size: 27px;
+  margin: 0 0 8px;
+}
+.ws-job-obs {
+  margin-top: 34px;
+  display: flex;
+  align-items: baseline;
+  gap: 26px;
+}
+.ws-job-obs .ws-md {
+  margin: 0 0 0 auto;
+}
+
+/* Which UIs survive */
+.ws-uiguess {
+  width: 1390px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: stretch;
+}
+.ws-uiguess h2 {
+  font-size: 52px;
+}
+.ws-uiguess p,
+.ws-uiguess li {
+  font-size: 24px;
+  line-height: 1.45;
+}
+.ws-uiguess .ws-small {
+  display: block;
+  margin-top: 12px;
+}
+
+/* MCP apps */
+.ws-mcpapps {
+  width: 1390px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+.ws-mcpapps h2 {
+  font-size: 32px;
+}
+
+/* The loop as a cycle: goal in, four stations, done out */
+.ws-cycle-wrap {
+  width: 1390px;
+  display: grid;
+  grid-template-columns: 220px 600px 1fr;
+  align-items: center;
+  gap: 80px;
+}
+.ws-cycle-io .concept-icon {
+  width: 48px;
+  height: 48px;
+  display: block;
+  margin-bottom: 10px;
+}
+.ws-cycle-ring {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.ws-cycle-dot {
+  fill: var(--duck);
+  stroke: var(--ink);
+  stroke-width: 3;
+  transform-box: view-box;
+  transform-origin: 260px 260px;
+  transition:
+    transform 0.9s ease-in-out,
+    opacity 0.4s;
+}
+.ws-cycle-done .ws-cycle-dot {
+  opacity: 0;
+}
+.ws-cycle-done > svg {
+  opacity: 0.35;
+  transition: opacity 0.4s;
+}
+.ws-cycle-ring > svg {
+  position: absolute;
+  inset: 40px;
+  width: 520px;
+  height: 520px;
+  color: var(--ink);
+}
+.ws-station {
+  position: absolute;
+  width: 230px;
+  background: #fff;
+  border: 2px solid var(--ink);
+  box-shadow: -7px 7px 0 var(--ink);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+}
+.ws-station .concept-icon {
+  width: 44px;
+  height: 44px;
+}
+.ws-station strong {
+  font:
+    20px AeonikMono,
+    monospace;
+}
+.ws-station span {
+  font-size: 18px;
+  color: inherit;
+}
+.ws-station {
+  transition:
+    transform 0.3s,
+    background 0.3s,
+    color 0.3s,
+    box-shadow 0.3s;
+  color: #8a8a8a;
+  border-color: #38383860;
+  box-shadow: -7px 7px 0 #38383830;
+}
+.ws-station.ws-active {
+  background: var(--sun);
+  color: var(--ink);
+  border-color: var(--ink);
+  box-shadow: -7px 7px 0 var(--ink);
+  z-index: 1;
+  transform: scale(1.08);
+}
+.ws-cycle-center small {
+  font-size: 14px;
+  color: #777;
+}
+.ws-cycle-log {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+}
+.ws-cycle-log ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ws-cycle-log li {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 10px;
+  align-items: baseline;
+  font-size: 19px;
+  color: #555;
+  padding: 3px 8px;
+  border-left: 3px solid transparent;
+  transition:
+    opacity 0.4s,
+    background 0.3s;
+}
+.ws-cycle-log li b {
+  font:
+    15px AeonikMono,
+    monospace;
+  color: #087f72;
+}
+.ws-cycle-log li.ws-hidden {
+  opacity: 0;
+}
+.ws-cycle-log li.ws-now {
+  background: #fff4ae;
+  border-left-color: var(--ink);
+  color: var(--ink);
+}
+.ws-cycle-log li.ws-stop b {
+  color: var(--ink);
+}
+.ws-cycle-exit {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border: 2px solid #38383830;
+  background: #ffffff80;
+  color: #888;
+  transition: all 0.4s;
+}
+.ws-cycle-exit .concept-icon {
+  width: 40px;
+  height: 40px;
+  flex: none;
+}
+.ws-cycle-exit span {
+  display: flex;
+  flex-direction: column;
+  font-size: 19px;
+}
+.ws-cycle-exit strong {
+  font:
+    20px AeonikMono,
+    monospace;
+}
+.ws-cycle-exit.ws-on {
+  background: var(--sun);
+  border-color: var(--ink);
+  box-shadow: -7px 7px 0 var(--ink);
+  color: var(--ink);
+}
+.ws-st-top {
+  left: 185px;
+  top: -20px;
+}
+.ws-st-right {
+  right: -60px;
+  top: 215px;
+}
+.ws-st-bottom {
+  left: 185px;
+  bottom: -20px;
+}
+.ws-st-left {
+  left: -60px;
+  top: 215px;
+}
+.ws-cycle-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font:
+    20px AeonikMono,
+    monospace;
+  color: #087f72;
+}
+.ws-cycle-center .concept-icon {
+  width: 64px;
+  height: 64px;
+}
+
+/* Anatomy: human, harness (instructions, context, model, tools), environment */
+.ws-anat {
+  width: 1430px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.ws-anat-side {
+  width: 190px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  font-size: 19px;
+}
+.ws-anat-side .concept-icon {
+  width: 64px;
+  height: 64px;
+}
+.ws-anat-side strong,
+.ws-anat-box strong {
+  font:
+    24px AeonikMono,
+    monospace;
+}
+.ws-anat-harness {
+  flex: 1;
+  position: relative;
+  border: 3px solid var(--ink);
+  background: #fffaf0;
+  box-shadow: -9px 9px 0 var(--ink);
+  padding: 62px 24px 22px;
+}
+.ws-anat-label {
+  position: absolute;
+  top: 14px;
+  left: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font:
+    19px AeonikMono,
+    monospace;
+  color: #087f72;
+}
+.ws-anat-label .concept-icon {
+  width: 30px;
+  height: 30px;
+}
+.ws-anat-core {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.ws-anat-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.ws-anat-box {
+  width: 200px;
+  background: #fff;
+  border: 2px solid var(--ink);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  font-size: 17px;
+}
+.ws-anat-box .concept-icon {
+  width: 46px;
+  height: 46px;
+}
+.ws-anat-model {
+  background: var(--sun);
+  padding: 30px 14px;
+}
+.ws-anat-calls {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font:
+    17px AeonikMono,
+    monospace;
+  white-space: nowrap;
+}
+.ws-anat-rails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 2px dashed #38383860;
+}
+.ws-anat-rails span {
+  font:
+    17px AeonikMono,
+    monospace;
+  border: 1px solid var(--ink);
+  padding: 4px 10px;
+  background: #fff;
+}
+
+/* Levels: rented vs owned, one row per level */
+.ws-levels {
+  width: 1430px;
+}
+.ws-levels-head,
+.ws-levels-row {
+  display: grid;
+  grid-template-columns: 250px repeat(5, 1fr);
+  gap: 12px;
+  align-items: center;
+}
+.ws-levels-head span {
+  font:
+    18px AeonikMono,
+    monospace;
+  color: #087f72;
+  padding: 0 8px 10px;
+}
+.ws-levels-row {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid #38383840;
+  padding: 14px 0;
+  cursor: pointer;
+  text-align: left;
+}
+.ws-levels-row:hover {
+  background: #fff4ae60;
+}
+.ws-levels-name {
+  font:
+    28px AeonikMono,
+    monospace;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.ws-levels-name b {
+  font-size: 44px;
+}
+.ws-rented,
+.ws-owned {
+  font-size: 20px;
+  padding: 12px 12px;
+  border: 2px solid #38383830;
+  background: #ffffff80;
+  color: #777;
+}
+.ws-owned {
+  background: var(--sun);
+  border-color: var(--ink);
+  color: var(--ink);
+  font-weight: 600;
+}
+.ws-caption .ws-owned {
+  padding: 2px 8px;
+  font-size: inherit;
+}
+
+/* What anyone can query costs: eight boxes, then the MotherDuck column map */
+.ws-dbox-grid {
+  width: 1300px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+.ws-dbox {
+  background: #fff;
+  border: 1.5px solid #38383828;
+  border-top: 6px solid var(--duck);
+  border-radius: 11px;
+  padding: 26px 22px;
+  min-height: 170px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ws-dbox.sky {
+  border-top-color: var(--sky);
+}
+.ws-dbox.green {
+  border-top-color: var(--garden);
+}
+.ws-dbox strong {
+  font:
+    28px AeonikMono,
+    monospace;
+  text-transform: uppercase;
+}
+.ws-dbox span {
+  font-size: 20px;
+  color: #666;
+}
+.ws-dmd {
+  width: 1430px;
+  display: grid;
+  grid-template-columns: 1fr 120px 1.35fr 120px 1fr;
+  align-items: center;
+}
+.ws-dmd-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ws-dmd-h {
+  font:
+    20px AeonikMono,
+    monospace;
+  text-transform: uppercase;
+  color: #087f72;
+}
+.ws-dmd-cell {
+  background: #fff;
+  border: 1.5px solid #38383828;
+  border-left: 6px solid var(--duck);
+  border-radius: 9px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.ws-dmd-cell.green {
+  border-left-color: var(--garden);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+.ws-dmd-cell.sky {
+  border-left-color: var(--sky);
+}
+.ws-dmd-cell strong {
+  font:
+    21px AeonikMono,
+    monospace;
+  display: block;
+}
+.ws-dmd-cell span {
+  font-size: 16px;
+  color: #666;
+}
+.ws-dmd-cell img,
+.ws-dmd-cell .concept-icon {
+  width: 38px;
+  height: 38px;
+  flex: none;
+}
+.ws-dmd-main .ws-dmd-cell {
+  background: #fffbe0;
+}
+.ws-dmd-conn {
+  text-align: center;
+  font:
+    44px AeonikMono,
+    monospace;
+}
+.ws-dmd-conn small {
+  display: block;
+  font-size: 15px;
+  color: #666;
+}
+
+/* Definitions with sources */
+.ws-define {
+  width: 1430px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.ws-quote {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  background: #fff;
+  border: 2px solid var(--ink);
+  box-shadow: -7px 7px 0 var(--ink);
+  padding: 20px 24px;
+}
+.ws-quote p {
+  font-size: 25px;
+  line-height: 1.35;
+  margin: 10px 0 0;
+}
+.ws-quote mark {
+  background: transparent;
+  color: inherit;
+}
+.ws-quote mark.ws-mark-on {
+  background: var(--sun);
+  box-shadow: 0 0 0 3px var(--sun);
+}
+.ws-define-sum p {
+  font-size: 25px;
+}
+.ws-hidden {
+  visibility: hidden;
+}
+
+/* Level 3: your MCP server between the client and MotherDuck */
+.ws-wl {
+  width: 1390px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.ws-wl .ws-anat-side {
+  width: 260px;
+}
+.ws-wl-proxy {
+  flex: 1;
+}
+.ws-wl-proxy ul {
+  margin: 14px 0 0;
+  padding-left: 26px;
+  font-size: 24px;
+  line-height: 1.55;
+}
+
+/* Hands-on: time box, steps, exit check */
+.ws-ho {
+  width: 1430px;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 1fr auto;
+  gap: 18px 40px;
+  border: 3px dashed var(--ink);
+  padding: 30px 34px;
+  background: #ffffff70;
+}
+.ws-ho-side {
+  grid-row: span 2;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.ws-ho-clock {
+  font:
+    64px AeonikMono,
+    monospace;
+  line-height: 1;
+}
+.ws-ho-needs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 18px;
+}
+.ws-ho-needs span:not(.narrative-kicker) {
+  border: 1px solid var(--ink);
+  background: #fff;
+  padding: 4px 10px;
+}
+.ws-ho-steps {
+  margin: 0;
+  padding-left: 34px;
+  font-size: 25px;
+  line-height: 1.45;
+}
+.ws-ho-steps li {
+  margin-bottom: 8px;
+}
+.ws-ho-done {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--sun);
+  border: 2px solid var(--ink);
+  padding: 12px 18px;
+  font-size: 22px;
+}
+.ws-ho-done .concept-icon {
+  width: 34px;
+  height: 34px;
+  flex: none;
+}
+
+/* References */
+.ws-refs {
+  width: 1430px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 40px;
+}
+.ws-refs a {
+  display: flex;
+  gap: 14px;
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid #38383830;
+  padding: 8px 0;
+  font-size: 20px;
+}
+.ws-refs b {
+  font:
+    18px AeonikMono,
+    monospace;
+  min-width: 210px;
+}
+
+/* Icons on the harness cards, the UI table, the levels table and the DIY boxes */
+.ws-harness-card .concept-icon {
+  width: 46px;
+  height: 46px;
+  display: block;
+  margin-bottom: 10px;
+}
+.ws-ui-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.ws-ui-cell .concept-icon {
+  width: 34px;
+  height: 34px;
+  flex: none;
+}
+.ws-ui-tab .concept-icon {
+  width: 26px;
+  height: 26px;
+  color: #087f72;
+}
+.ws-levels-row .ws-rented,
+.ws-levels-row .ws-owned {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ws-levels-logos {
+  display: inline-flex;
+  gap: 6px;
+  flex: none;
+}
+.ws-levels-logos img,
+.ws-levels-logos .concept-icon {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+.ws-rented .ws-levels-logos img {
+  filter: grayscale(0.2);
+}
+.ws-dbox .concept-icon {
+  width: 44px;
+  height: 44px;
+}
+.ws-levels-row .ws-cell-stack {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 17px;
+}
+
+/* Hands-on: repo pointer, terminal commands and prompts to paste */
+.ws-ho-repo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ws-ho-repo code {
+  font:
+    17px AeonikMono,
+    monospace;
+  background: var(--sun);
+  border: 2px solid var(--ink);
+  padding: 6px 10px;
+  overflow-wrap: anywhere;
+}
+.ws-ho {
+  grid-template-rows: auto;
+  padding: 24px 30px;
+}
+.ws-ho-side {
+  grid-row: auto;
+  gap: 14px;
+}
+.ws-ho-side .ws-ho-done {
+  align-items: flex-start;
+  font-size: 18px;
+  padding: 10px 12px;
+}
+.ws-ho-steps {
+  font-size: 21px;
+  line-height: 1.3;
+}
+.ws-ho-steps li {
+  margin-bottom: 8px;
+}
+.ws-visual .ws-ho-cmd {
+  display: block;
+  margin-top: 5px;
+  font:
+    16px AeonikMono,
+    monospace;
+  color: var(--sand);
+  background: var(--ink);
+  padding: 4px 10px;
+  overflow-wrap: anywhere;
+}
+.ws-visual .ws-ho-cmd::before {
+  content: '$ ';
+  opacity: 0.6;
+}
+.ws-ho-prompt {
+  display: block;
+  margin-top: 4px;
+  font:
+    16px/1.35 AeonikMono,
+    monospace;
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-left: 8px solid var(--sky);
+  padding: 5px 10px;
+}
+.ws-ho-prompt b {
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  background: var(--sky);
+  padding: 1px 6px;
+  margin-right: 10px;
+  vertical-align: 2px;
+}
+
+/* MCP apps: screenshot slots */
+.ws-mcpapps .ws-node {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ws-shot {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top left;
+  border: 2px solid var(--ink);
+  margin-bottom: 8px;
+}
+.ws-shot-missing {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  border-style: dashed;
+  background: var(--sand);
+  font-size: 20px;
+}
+.ws-shot-missing code {
+  font:
+    15px AeonikMono,
+    monospace;
+  opacity: 0.7;
+}
+
+/* The dataset slide */
+.ws-dataset {
+  width: 1430px;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1fr;
+  gap: 26px 40px;
+}
+.ws-dataset-co h2 {
+  font-size: 44px;
+  margin: 10px 0;
+}
+.ws-dataset-co p {
+  font-size: 24px;
+  line-height: 1.4;
+  margin: 0 0 14px;
+}
+.ws-dataset-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 21px;
+}
+.ws-dataset-list span:not(.narrative-kicker) {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid #38383830;
+  padding-bottom: 4px;
+}
+.ws-dataset-list code {
+  font:
+    18px AeonikMono,
+    monospace;
+}
+.ws-dataset-q {
+  grid-column: 1 / -1;
+  background: var(--sun);
+  border: 2px solid var(--ink);
+  box-shadow: -9px 9px 0 var(--ink);
+  padding: 16px 24px;
+}
+.ws-dataset-q p {
+  font-size: 28px;
+  line-height: 1.35;
+  margin: 6px 0 0;
+}
+
+/* Level 2: two ways in */
+.ws-l2paths code {
+  font:
+    19px AeonikMono,
+    monospace;
+}
+
+/* Speaker intro */
+.ws-person {
+  width: 1430px;
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 90px;
+  align-items: start;
+}
+.ws-person .ws-shot {
+  aspect-ratio: 3 / 4;
+  object-position: center;
+  border: 0;
+  box-shadow: -14px 14px 0 var(--ink);
+  margin: 0;
+}
+.ws-person-facts {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.ws-person-facts h3 {
+  font:
+    40px AeonikMono,
+    monospace;
+  margin: 0;
+  line-height: 1.15;
+}
+.ws-person-facts p {
+  font-size: 24px;
+  color: #383838b0;
+  margin: 4px 0 0;
+}
+.ws-person-facts a {
+  color: inherit;
+}
+
+/* Rules for this workshop */
+.ws-house-rules {
+  width: 1430px;
+}
+.ws-house-rules ol {
+  margin: 0;
+  padding-left: 34px;
+  font-size: 32px;
+  line-height: 1.6;
+}
+.ws-house-rules-time {
+  margin: 56px 0 0;
+  text-align: right;
+  font-size: 38px;
+  font-style: italic;
+}
+
+/* Agenda without the band: keep the two rows apart */
+.ws-agenda-row.ws-agenda-levels {
+  margin-top: 36px;
+}
+.ws-person .ws-shot-missing {
+  border: 2px dashed var(--ink);
+  box-shadow: none;
+}
+
+/* Links inside hands-on steps */
+.ws-ho-steps a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--sky);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 3px;
+}
+
+/* Hands-on: the builder duck, top right next to the title */
+.ws-ho {
+  position: relative;
+}
+.ws-ho-duck {
+  position: absolute;
+  right: 6px;
+  top: -190px;
+  width: 190px;
+  pointer-events: none;
+}
+
+/* Anatomy: MotherDuck feet on the environment side */
+.ws-anat-md {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.ws-anat-md img {
+  width: 34px;
+  height: auto;
+}
+
+/* MCP apps: the screenshots are about square, keep their top */
+.ws-mcpapps .ws-shot {
+  aspect-ratio: 1 / 0.82;
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* MCP apps: two big screenshots, the traces card narrower */
+.ws-mcpapps {
+  width: 1430px;
+  grid-template-columns: 1fr 1fr 0.55fr;
+  gap: 32px;
+}
+.ws-mcpapps .ws-shot {
+  aspect-ratio: 1 / 0.74;
+}
+.ws-mcpapps .ws-node {
+  padding: 16px 18px;
+  gap: 6px;
+}
+.ws-mcpapps h2 {
+  font-size: 28px;
+}
+
+/* Context window: one takeaway line */
+.ws-window .ws-window-notes {
+  display: block;
+  margin-top: 34px;
+}
+.ws-window .ws-window-notes p {
+  font-size: 32px;
+  line-height: 1.35;
+  max-width: none;
+  margin: 0 0 12px;
+}
+.ws-window .ws-window-notes p.ws-small {
+  font-size: 18px;
+}
+
+/* Secure views animation, full width */
+.ws-secure-anim img {
+  display: block;
+  width: 1430px;
+  height: auto;
+}
+
+/* Own the tool surface: duck feet, and the token band */
+.ws-wl-wrap {
+  width: 1430px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+.ws-wl-feet {
+  width: 52px;
+  height: auto;
+  display: block;
+  margin-bottom: 10px;
+}
+.ws-wl-token {
+  background: var(--sun);
+  border: 2px solid var(--ink);
+  box-shadow: -9px 9px 0 var(--ink);
+  padding: 14px 22px;
+}
+.ws-wl-token p {
+  margin: 6px 0 0;
+  font-size: 23px;
+  line-height: 1.4;
+}
+
+/* Level 4 traces: the flow on the left, the Dive on the right */
+.ws-traces {
+  width: 1430px;
+  display: grid;
+  grid-template-columns: 430px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.ws-traces-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ws-traces-flow .ws-arrow {
+  text-align: center;
+}
+.ws-traces-flow .ws-node p {
+  font-size: 21px;
+}
+.ws-traces-shot {
+  margin: 0;
+}
+.ws-traces-shot img,
+.ws-tflow-shot {
+  display: block;
+  width: 100%;
+  border: 2px solid var(--ink);
+  box-shadow: -9px 9px 0 var(--ink);
+  background: #fff;
+}
+.ws-traces-shot figcaption {
+  margin-top: 14px;
+  font:
+    15px AeonikMono,
+    monospace;
+  opacity: 0.7;
+}
+
+/* Bonus: traces flow */
+.ws-tflow {
+  width: 1430px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+.ws-tflow-row {
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+}
+.ws-tflow-row .ws-node {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 18px;
+}
+.ws-tflow-row .ws-node .concept-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 6px;
+}
+.ws-tflow-row .ws-node strong {
+  font-size: 22px;
+}
+.ws-tflow-row .ws-node span {
+  font-size: 17px;
+  opacity: 0.8;
+}
+.ws-tflow-row .ws-arrow {
+  align-self: center;
+}
+.ws-tflow-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.ws-tflow-tree {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ws-tflow-span {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-left-width: 8px;
+  padding: 6px 12px;
+  font-size: 18px;
+}
+.ws-tflow-span span {
+  opacity: 0.7;
+  font-size: 16px;
+}
+.ws-visual .ws-tflow-span code {
+  font-size: 15px;
+  padding: 1px 6px;
+}
+.ws-op-invoke-agent {
+  border-left-color: var(--sky);
+}
+.ws-op-chat {
+  border-left-color: #a78bfa;
+}
+.ws-op-execute-tool {
+  border-left-color: var(--duck);
+}
+.ws-visual code.ws-tflow-on {
+  align-self: flex-start;
+  color: var(--sand);
+  background: var(--ink);
+  font-size: 17px;
+}
+
+/* MCP apps: all three cards have a screenshot now */
+.ws-mcpapps {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* Wrap: agents sign up */
+.ws-signup {
+  width: 1430px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 0.8fr auto 0.8fr;
+  align-items: stretch;
+  gap: 16px;
+}
+.ws-signup > .ws-arrow {
+  align-self: center;
+}
+.ws-signup .ws-node {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 20px;
+}
+.ws-signup .ws-node ul {
+  margin: 0;
+  padding-left: 22px;
+  font-size: 19px;
+  line-height: 1.7;
+}
+.ws-signup .ws-node > span:not(.narrative-kicker) {
+  font-size: 19px;
+}
+.ws-visual code.ws-signup-cmd {
+  color: var(--sand);
+  background: var(--ink);
+  font-size: 16px;
+  padding: 8px 10px;
+  overflow-wrap: anywhere;
+}
+.ws-signup .ws-span {
+  grid-column: 1 / -1;
+  margin-top: 18px;
+  font-size: 24px;
+}
+
+/* Hands-on: copy buttons next to each prompt and command, repo link */
+.ws-ho-row {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  margin-top: 5px;
+}
+.ws-ho-row .ws-ho-cmd,
+.ws-ho-row .ws-ho-prompt {
+  flex: 1;
+  margin-top: 0;
+}
+.ws-copy {
+  flex: none;
+  align-self: stretch;
+  min-width: 78px;
+  font:
+    13px AeonikMono,
+    monospace;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  background: #fff;
+  border: 2px solid var(--ink);
+  cursor: pointer;
+}
+.ws-copy:hover {
+  background: var(--sun);
+}
+.ws-ho-repo a {
+  color: inherit;
+  text-decoration: none;
+}
+.ws-ho-repo a,
+.ws-ho-repo a code {
+  display: block;
+}
+
+/* Title slide: the Data Outpost design, full bleed, no deck chrome */
+.hero-slide h1,
+.hero-slide footer {
+  display: none;
+}
+.ws-title-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Level 3: the custom tool snippet and other ideas */
+.ws-custom-tool {
+  width: 1430px;
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.ws-custom-code pre {
+  margin: 10px 0 0;
+  padding: 18px 22px;
+  background: var(--ink);
+  color: var(--sand);
+  border: 2px solid var(--ink);
+  box-shadow: -9px 9px 0 #00000040;
+  overflow: hidden;
+}
+.ws-visual .ws-custom-code pre code {
+  font:
+    18px/1.45 AeonikMono,
+    monospace;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  white-space: pre;
+}
+.ws-custom-ideas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ws-custom-ideas > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: #fff;
+  border: 2px solid var(--ink);
+  padding: 8px 14px;
+}
+.ws-custom-ideas > div span {
+  font-size: 19px;
+  opacity: 0.8;
+}
+
+/* Hands-on slides with six steps or more: tighter type */
+.ws-ho-dense .ws-ho-steps {
+  font-size: 19px;
+  line-height: 1.25;
+}
+.ws-ho-dense .ws-ho-steps li {
+  margin-bottom: 5px;
+}
+.ws-ho-dense .ws-ho-row {
+  margin-top: 3px;
+}
+.ws-visual.ws-ho-dense .ws-ho-cmd {
+  font-size: 14px;
+  padding: 3px 10px;
+}
+.ws-ho-dense .ws-ho-prompt {
+  font-size: 14px;
+  line-height: 1.3;
+  padding: 3px 10px;
+}
+
+/* Agenda: the builder duck next to each hands-on badge */
+.ws-agenda-ho-row {
+  margin-top: auto;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+.ws-agenda-ho-row .ws-agenda-ho {
+  margin-top: 0;
+}
+.ws-agenda-duck {
+  width: 62px;
+  height: auto;
+}
+.ws-agenda-ho-row {
+  padding-top: 10px;
+}
+.ws-agenda-ho-row .ws-agenda-ho {
+  flex: none;
+  white-space: nowrap;
+}
+.ws-agenda-ho-row .ws-agenda-duck {
+  width: 52px;
+}
+
+/* Thanks: the survey link */
+.ws-survey {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 6px 0 10px;
+  padding: 18px 26px;
+  color: var(--ink);
+  text-decoration: none;
+  background: var(--sun);
+  border: 3px solid var(--ink);
+  box-shadow: -9px 9px 0 var(--ink);
+}
+.ws-survey b {
+  font-size: 44px;
+  line-height: 1.1;
+}
+.ws-survey span {
+  font:
+    24px AeonikMono,
+    monospace;
+}
+.ws-survey:hover {
+  background: #fff;
+}
+.ws-slide:has(.ws-thanks) > h1 {
+  display: none;
+}
+.ws-visual.ws-ho-dense .ws-ho-cmd {
+  font-size: 13px;
+}
